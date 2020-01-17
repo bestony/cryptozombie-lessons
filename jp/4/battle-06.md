@@ -18,7 +18,7 @@ material:
             return uint(keccak256(now, msg.sender, randNonce)) % _modulus;
           }
 
-          // 1. modifierをここに加えるのだ
+          // 1. modifierをここに加えるの�
           function attack(uint _zombieId, uint _targetId) external {
             // 2. 関数定義をここから始めよ
           }
@@ -235,7 +235,7 @@ material:
 
 `attack`関数の定義を続けていくが、今度は`ownerOf`修飾子も使うからな。
 
-## さあテストだ
+## さあテスト�
 
 1. `ownerOf`修飾子を`attack`関数に加え、関数を呼び出した者が`_zombieId`を所有し
    ているか確認せよ。

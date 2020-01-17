@@ -21,7 +21,7 @@ material:
 
           function _createZombie(string _name, uint _dna) private {
               zombies.push(Zombie(_name, _dna));
-          } 
+          }
 
           function _generateRandomDna(string _str) private view returns (uint) {
               // start here
@@ -46,7 +46,7 @@ material:
 
           function _createZombie(string _name, uint _dna) private {
               zombies.push(Zombie(_name, _dna));
-          } 
+          }
 
           function _generateRandomDna(string _str) private view returns (uint) {
               uint rand = uint(keccak256(abi.encodePacked(_str)));

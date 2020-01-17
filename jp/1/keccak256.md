@@ -21,10 +21,10 @@ material:
 
           function _createZombie(string _name, uint _dna) private {
               zombies.push(Zombie(_name, _dna));
-          } 
+          }
 
           function _generateRandomDna(string _str) private view returns (uint) {
-              // ここから始めるのだ
+              // ここから始めるの�
           }
 
       }
@@ -46,7 +46,7 @@ material:
 
           function _createZombie(string _name, uint _dna) private {
               zombies.push(Zombie(_name, _dna));
-          } 
+          }
 
           function _generateRandomDna(string _str) private view returns (uint) {
               uint rand = uint(keccak256(_str));
@@ -100,7 +100,7 @@ uint8 c = a * uint8(b);
 することになる。`uint8`にキャストすることで、正常に動作する上にコンパイラもエラ
 ーを吐き出すことがなくなる。
 
-# それではテストだ
+# それではテスト�
 
 `_generateRandomDna`関数の中身を書いてみよ！以下の点に従って書くように：
 

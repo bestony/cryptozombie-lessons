@@ -8,7 +8,7 @@ roadmap: roadmap6.png
 
 このコースでは、実際のゲーム開発の領域へと足を踏み入れていく。
 
-我らがブロックチェーンベースのモバイルカードゲーム
+我らがブロックチェーンベースのモバイルカードゲー�
 ・<a href="https://loom.games" target=_blank>Zombie Battleground</a> の _カスタ
 ムゲームモード_ を作っていこう。
 

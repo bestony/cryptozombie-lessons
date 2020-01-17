@@ -181,7 +181,7 @@ material:
 
 どれ、前のチャプターでセキュリティホールに気がついたか？
 
-`setKittyContractAddress` は `external`だから、だれでも呼び出すことができるのだ
+`setKittyContractAddress` は `external`だから、だれでも呼び出すことができるの�
 ！つまり、この関数を呼び出した奴はクリプトキティーズのコントラクトのアドレスを変
 更することで、我々のアプリをめちゃくちゃにすることが可能なのだ。
 
@@ -260,14 +260,14 @@ contract Ownable {
 2. `onlyOwner`修飾子を追加して、`owner`だけが特定の関数にアクセスできるように設
    定する。
 
-3. 新しい`owner`にコントラクトを譲渡することも可能だ
+3. 新しい`owner`にコントラクトを譲渡することも可能�
 
 `onlyOwner`は誰もが皆必要としているものだから非常に一般的になった。だから
 Solidity の DApp を開発するときには、皆がこの`Ownable`コントラクトをコピーペース
 トしてから、最初のコントラクトの継承を始めているのだ。我々
 も`setKittyContractAddress` を`onlyOwner`に制限したいから、同じ様にするのだぞ。
 
-## それではテストだ
+## それではテスト�
 
 新しいファイルの `ownable.sol`にすでに`Ownable`のコードをコピーしてある。そこ
 で`ZombieFactory` を継承させることにする。

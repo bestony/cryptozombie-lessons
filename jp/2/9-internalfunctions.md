@@ -139,13 +139,13 @@ contract BLT is Sandwich {
 
   function eatWithBacon() public returns (string) {
     baconSandwichesEaten++;
-    // `eat`メソッドはinternalで宣言されているから呼び出すことが可能だ
+    // `eat`メソッドはinternalで宣言されているから呼び出すことが可能�
     eat();
   }
 }
 ```
 
-# それではテストだ
+# それではテスト�
 
 1. `_createZombie()` を`private` から `internal`に変更して、他のコントラクトから
    アクセスできるようにせよ。

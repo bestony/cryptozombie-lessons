@@ -30,7 +30,7 @@ material:
 
           KittyInterface kittyContract;
 
-          // 1. modifierをここに作成するのだ
+          // 1. modifierをここに作成するの�
 
           function setKittyContractAddress(address _address) external onlyOwner {
             kittyContract = KittyInterface(_address);
@@ -46,7 +46,7 @@ material:
 
           // 2. 関数定義にmodifierを加えよ
           function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal {
-            // 3. この一行を削除するのだ
+            // 3. この一行を削除するの�
             require(msg.sender == zombieToOwner[_zombieId]);
             Zombie storage myZombie = zombies[_zombieId];
             require(_isReady(myZombie));
@@ -290,7 +290,7 @@ material:
 
 答えは下に書いてあるが、よく考えるまで続きはやるんじゃないぞ。
 
-## 答えはこうだ
+## 答えはこう�
 
 これまでのレッスンでこのチェックは何度もやっている
 。`changeName()`、`changeDna()`、`feedAndMultiply()`において、我々は以下のチェッ
@@ -304,7 +304,7 @@ require(msg.sender == zombieToOwner[_zombieId]);
 から、コードを綺麗にして繰り返しを避けるために、このロジックを独自の`modifier`に
 格納してみよう。
 
-## さあテストだ
+## さあテスト�
 
 このロジックを最初に使った場所である`zombiefeeding.sol`に戻ろう。ロジックをリフ
 ァクターして独自の`modifier`に入れていくぞ。
@@ -318,5 +318,5 @@ require(msg.sender == zombieToOwner[_zombieId]);
 
 2. `feedAndMultiply`の関数定義を変更し、`ownerOf`修飾子を使うようにせよ。
 
-3. 今は`modifier`を使っているので、以下の一行は削除するのだ
+3. 今は`modifier`を使っているので、以下の一行は削除するの�
    。`require(msg.sender == zombieToOwner[_zombieId]);`

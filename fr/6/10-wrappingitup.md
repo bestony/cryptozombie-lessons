@@ -60,7 +60,7 @@ commencé avec index.html).
 
 4. Des fonctions dans l'interface, qui permettent à l'utilisateur de se nourrir
    de CryptoKitties. Il pourrait y avoir un bouton sur chaque zombie de la page
-   d'accueil qui dit "Nourris moi", puis un champ de texte qui demande à
+   d'accueil qui dit "Nourris moi", puis un champ de texte qui demande �
    l'utilisateur l'ID du chaton (ou l'URL de ce chaton, ex :
    <a href="https://www.cryptokitties.co/kitty/578397" target=_blank>https://www.cryptokitties.co/kitty/578397</a>).
    Cela déclencherait la fonction `feedOnKitty`.
@@ -121,7 +121,7 @@ leçons. Nous vous laissons donc le soin de l'implémenter vous-mêmes.
 > interagir avec notre DApp est complètement centralisée sur un serveur quelque
 > part.
 >
-> Cependant, avec le SDK que nous sommes en train de développer à
+> Cependant, avec le SDK que nous sommes en train de développer �
 > href="https://medium.com/loom-network/loom-network-is-live-scalable-ethereum-dapps-coming-soon-to-a-dappchain-near-you-29d26da00880"
 > target=\_blank>Loom Network</a>, bientôt vous pourrez avoir des front-end
 > comme celui-ci sur leur propre DAppChain au lieu d'un serveur centralisé. De

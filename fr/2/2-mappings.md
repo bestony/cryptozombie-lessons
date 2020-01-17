@@ -106,7 +106,7 @@ appartient à un utilisateur unique** (ou a un smart contract).
 
 Nous pouvons donc l'utiliser comme un ID unique pour définir l'appartenance de
 nos zombies. Quand un utilisateur crée de nouveaux zombies en interagissant avec
-notre application, nous pourrons définir l'appartenance de ces zombies à
+notre application, nous pourrons définir l'appartenance de ces zombies �
 l'adresse Ethereum utilisée pour appeler la fonction.
 
 ## Mappages

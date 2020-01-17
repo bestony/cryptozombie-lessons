@@ -13,7 +13,7 @@ material:
 
         contract ZombieHelper is ZombieFeeding {
 
-          // 1. ここにlevelUpFeeを定義するのだ
+          // 1. ここにlevelUpFeeを定義するの�
 
           modifier aboveLevel(uint _level, uint _zombieId) {
             require(zombies[_zombieId].level >= _level);
@@ -236,7 +236,7 @@ material:
 しいかもしれないから、素早く復習していくぞ。
 
 1. いつどこで関数を呼び出すかをコントロールする可視性修飾子というものがある
-   。`private`修飾子はコントラクト内の別の関数からのみ呼び出されるという意味だ
+   。`private`修飾子はコントラクト内の別の関数からのみ呼び出されるという意味�
    。`internal`修飾子は`private`修飾子に似ているが、そのコントラクトを継承したコ
    ントラクトからも呼び出す事ができる。`external`修飾子はコントラクト外からだけ
    呼び出す事ができて、最後に`public`修飾子だが、これはコントラクト内部・外部ど
@@ -311,7 +311,7 @@ OnlineStore.buySomething({from: web3.eth.defaultAccount, value: web3.utils.toWei
 > 注：関数に payable 修飾子がなく、Ether を上記のように送ろうとする場合、その関
 > 数はトランザクションを拒否します。
 
-## それではテストだ
+## それではテスト�
 
 我々のゾンビゲームで`payable`関数を作ってみよう。
 

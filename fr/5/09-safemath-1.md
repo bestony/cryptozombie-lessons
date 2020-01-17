@@ -447,7 +447,7 @@ données natif.
 
 Par exemple. avec la bibliothèque SafeMath, nous allons utiliser la syntaxe
 `using SafeMath for uint256`. La bibliothèque SafeMath a 4 fonctions — `add`,
-`sub`, `mul`, et `div`. Et maintenant nous pouvons utiliser ces fonctions à
+`sub`, `mul`, et `div`. Et maintenant nous pouvons utiliser ces fonctions �
 partir d'un `uint256` en faisant :
 
 ```

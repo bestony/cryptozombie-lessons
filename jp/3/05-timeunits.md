@@ -233,7 +233,7 @@ function fiveMinutesHavePassed() public view returns (bool) {
 
 ゾンビの`cooldown`機能にはこの時間の単位を使用するのだ。
 
-## それではテストだ
+## それではテスト�
 
 DApp にクールダウンタイマー機能を追加し、ゾンビが一度捕食したら、**1 day**待たな
 ければならないようにしたい。
