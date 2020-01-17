@@ -1,6 +1,6 @@
 ---
 title: Inmutabilidad de los Contratos
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -121,12 +121,14 @@ material:
           kittyContract = KittyInterface(_address);
         }
 
-        function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
+        function feedAndMultiply(uint _zombieId, uint _targetDna, string
+      _species) public {
           require(msg.sender == zombieToOwner[_zombieId]);
           Zombie storage myZombie = zombies[_zombieId];
           _targetDna = _targetDna % dnaModulus;
           uint newDna = (myZombie.dna + _targetDna) / 2;
-          if (keccak256(abi.encodePacked(_species)) == keccak256(abi.encodePacked("kitty"))) {
+          if (keccak256(abi.encodePacked(_species)) ==
+      keccak256(abi.encodePacked("kitty"))) {
             newDna = newDna - newDna % 100 + 99;
           }
           _createZombie("NoName", newDna);
@@ -141,34 +143,61 @@ material:
       }
 ---
 
-Hasta ahora, Solidity se ha parecido bastante a otros lenguajes como JavaScript. Pero hay unas cuantas maneras en las que las DApps de Ethereum son diferentes a las aplicaciones normales.
+Hasta ahora, Solidity se ha parecido bastante a otros lenguajes como JavaScript.
+Pero hay unas cuantas maneras en las que las DApps de Ethereum son diferentes a
+las aplicaciones normales.
 
-Para empezar, despues de implementar un contrato en Ethereum, es **_inmutable_**, lo que significa que nunca va a ser modificado o actualizado de nuevo.
+Para empezar, despues de implementar un contrato en Ethereum, es
+**_inmutable_**, lo que significa que nunca va a ser modificado o actualizado de
+nuevo.
 
-El código inicial que implementes en el contrato es el que va a permanecer, permanentemente, en la blockchain. Esto es debido a que una de las mayores preocupaciones de Solidity es la seguridad. Si hay un error en el código del contrato, no hay forma de solucionarlo más adelante. Tendrás que decirles a tus usuarios que empiecen a usar otra dirección de contrato inteligente que incluya ese arreglo.
+El código inicial que implementes en el contrato es el que va a permanecer,
+permanentemente, en la blockchain. Esto es debido a que una de las mayores
+preocupaciones de Solidity es la seguridad. Si hay un error en el código del
+contrato, no hay forma de solucionarlo más adelante. Tendrás que decirles a tus
+usuarios que empiecen a usar otra dirección de contrato inteligente que incluya
+ese arreglo.
 
-Pero es también una característica de los contratos inteligentes. El código es la ley. Si lees el código de un contrato inteligente y lo verificas, vas a estar totalmente seguro de que cada vez que lo llames va a hacer exactamente lo que el código dice que va a hacer. Nadie va a poder más adelante cambiar la función y que te devuelva resultados inesperados.
+Pero es también una característica de los contratos inteligentes. El código es
+la ley. Si lees el código de un contrato inteligente y lo verificas, vas a estar
+totalmente seguro de que cada vez que lo llames va a hacer exactamente lo que el
+código dice que va a hacer. Nadie va a poder más adelante cambiar la función y
+que te devuelva resultados inesperados.
 
 ## Dependencias externas
 
-En la Lección 2, hardcodeamos la dirección del contrato de CryptoKitties en nuestra DApp. Pero ¿qué pasa si el contrato de CryptoKitties tiene un error y alguien destruye todos los gatitos?
+En la Lección 2, hardcodeamos la dirección del contrato de CryptoKitties en
+nuestra DApp. Pero ¿qué pasa si el contrato de CryptoKitties tiene un error y
+alguien destruye todos los gatitos?
 
-Es improbable, pero si esto pasase dejaría nuestra DApp completamente inservible - nuestra DApp apuntará a una dirección hardcodeada que no devolverá gatitos nunca más. Nuestros zombis no podrán alimentarse de gatitos, y no podremos modificar nuestro contrato para solucionarlo.
+Es improbable, pero si esto pasase dejaría nuestra DApp completamente
+inservible - nuestra DApp apuntará a una dirección hardcodeada que no devolverá
+gatitos nunca más. Nuestros zombis no podrán alimentarse de gatitos, y no
+podremos modificar nuestro contrato para solucionarlo.
 
-Por este motivo, a veces tiene sentido programar funciones que te permitan actualizar partes de nuestra DApp.
+Por este motivo, a veces tiene sentido programar funciones que te permitan
+actualizar partes de nuestra DApp.
 
-Por ejemplo, en vez de hardcodear la dirección del contrato de CryptoKitties en nuestra DApp, probablemente deberíamos tener una función `setKittyContractAddress` que nos deje cambiar esta dirección en el futuro en caso de que algo ocurra con el contrato de CryptoKitties.
+Por ejemplo, en vez de hardcodear la dirección del contrato de CryptoKitties en
+nuestra DApp, probablemente deberíamos tener una función
+`setKittyContractAddress` que nos deje cambiar esta dirección en el futuro en
+caso de que algo ocurra con el contrato de CryptoKitties.
 
 ## Vamos a probarlo
 
-Vamos a actualizar nuestro código de la Lección 2 para que sea capaz de cambiar la dirección del contrato de CryptoKitties.
+Vamos a actualizar nuestro código de la Lección 2 para que sea capaz de cambiar
+la dirección del contrato de CryptoKitties.
 
 1. Borra la línea hardcodeada donde definíamos `ckAddress`.
 
-2. Cambia la línea donde creamos el `kittyContract` y únicamente declara la variable —  es decir, no la inicializes a nada.
+2. Cambia la línea donde creamos el `kittyContract` y únicamente declara la
+   variable —  es decir, no la inicializes a nada.
 
-3. Crea una función llamada `setKittyContractAddress`. Esta recibirá un argumento, `_address` (un `address`), y deberá ser una función `external`.
+3. Crea una función llamada `setKittyContractAddress`. Esta recibirá un
+   argumento, `_address` (un `address`), y deberá ser una función `external`.
 
-4. Dentro de la función, añade una línea de código que inicialize `kittyContract` a `KittyInterface(_address)`.
+4. Dentro de la función, añade una línea de código que inicialize
+   `kittyContract` a `KittyInterface(_address)`.
 
-> Nota: Si notas un agujero de seguridad en esta función, no te preocupes - lo arreglaremos en el próximo capítulo ;)
+> Nota: Si notas un agujero de seguridad en esta función, no te preocupes - lo
+> arreglaremos en el próximo capítulo ;)

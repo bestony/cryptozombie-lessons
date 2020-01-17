@@ -1,6 +1,6 @@
 ---
 title: Funksjon deklarasjon
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -53,9 +53,12 @@ function eatHamburgers(string _name, uint _amount) {
 }
 ```
 
-Dette er en funksjon kalt `eatHamburgers` som tar 2 parameterere: en `string` og en `uint`. La funksjonen stå tom, for nå.
+Dette er en funksjon kalt `eatHamburgers` som tar 2 parameterere: en `string` og
+en `uint`. La funksjonen stå tom, for nå.
 
-> Noter: Det er konvensjonelt (men ikke krevd) å starte funksjon parameter variabel navnmed understrek (`_`) for å differensiere mellom globale variabler. Vi kommer til å ta i bruk denne konvensjonen i dette kurset .
+> Noter: Det er konvensjonelt (men ikke krevd) å starte funksjon parameter
+> variabel navnmed understrek (`_`) for å differensiere mellom globale
+> variabler. Vi kommer til å ta i bruk denne konvensjonen i dette kurset .
 
 Do kommer til å kjøre en funksjon slik:
 
@@ -65,8 +68,10 @@ eatHamburgers("vitalik", 100);
 
 # Test det
 
-I appen vår kommer vi til å trenge å lage flere zombier. La oss lage en funksjon for det.
+I appen vår kommer vi til å trenge å lage flere zombier. La oss lage en funksjon
+for det.
 
-1. Lag en funksjon kalt `createZombie`. Den kommer til å ta to parametere: **\_name** (en `string`), og **\_dna** (en `uint`).
+1. Lag en funksjon kalt `createZombie`. Den kommer til å ta to parametere:
+   **\_name** (en `string`), og **\_dna** (en `uint`).
 
 La funksjonen stå tom - vi kommer til å fylle inn resten senere.

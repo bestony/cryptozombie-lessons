@@ -1,6 +1,6 @@
 ---
 title: SafeMath Part 2
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -446,7 +446,10 @@ library SafeMath {
 }
 ```
 
-First we have the `library` keyword — libraries are similar to `contract`s but with a few differences. For our purposes, libraries allow us to use the `using` keyword, which automatically tacks on all of the library's methods to another data type:
+First we have the `library` keyword — libraries are similar to `contract`s but
+with a few differences. For our purposes, libraries allow us to use the `using`
+keyword, which automatically tacks on all of the library's methods to another
+data type:
 
 ```
 using SafeMath for uint;
@@ -456,7 +459,9 @@ test = test.mul(3); // test now equals 6
 test = test.add(5); // test now equals 11
 ```
 
-Note that the `mul` and `add` functions each require 2 arguments, but when we declare `using SafeMath for uint`, the `uint` we call the function on (`test`) is automatically passed in as the first argument.
+Note that the `mul` and `add` functions each require 2 arguments, but when we
+declare `using SafeMath for uint`, the `uint` we call the function on (`test`)
+is automatically passed in as the first argument.
 
 Let's look at the code behind `add` to see what SafeMath does:
 
@@ -468,15 +473,24 @@ function add(uint256 a, uint256 b) internal pure returns (uint256) {
 }
 ```
 
-Basically `add` just adds 2 `uint`s like `+`, but it also contains an `assert` statement to make sure the sum is greater than `a`. This protects us from overflows.
+Basically `add` just adds 2 `uint`s like `+`, but it also contains an `assert`
+statement to make sure the sum is greater than `a`. This protects us from
+overflows.
 
-`assert` is similar to `require`, where it will throw an error if false. The difference between `assert` and `require` is that `require` will refund the user the rest of their gas when a function fails, whereas `assert` will not. So most of the time you want to use `require` in your code; `assert` is typically used when something has gone horribly wrong with the code (like a `uint` overflow).
+`assert` is similar to `require`, where it will throw an error if false. The
+difference between `assert` and `require` is that `require` will refund the user
+the rest of their gas when a function fails, whereas `assert` will not. So most
+of the time you want to use `require` in your code; `assert` is typically used
+when something has gone horribly wrong with the code (like a `uint` overflow).
 
-So, simply put, SafeMath's `add`, `sub`, `mul`, and `div` are functions that do the basic 4 math operations, but throw an error if an overflow or underflow occurs.
+So, simply put, SafeMath's `add`, `sub`, `mul`, and `div` are functions that do
+the basic 4 math operations, but throw an error if an overflow or underflow
+occurs.
 
 ### Using SafeMath in our code.
 
-To prevent overflows and underflows, we can look for places in our code where we use `+`, `-`, `*`, or `/`, and replace them with `add`, `sub`, `mul`, `div`.
+To prevent overflows and underflows, we can look for places in our code where we
+use `+`, `-`, `*`, or `/`, and replace them with `add`, `sub`, `mul`, `div`.
 
 Ex. Instead of doing:
 
@@ -492,7 +506,8 @@ myUint = myUint.add(1);
 
 ## Putting it to the Test
 
-We have 2 places in `ZombieOwnership` where we used math operations. Let's swap them out with SafeMath methods.
+We have 2 places in `ZombieOwnership` where we used math operations. Let's swap
+them out with SafeMath methods.
 
 1. Replace `++` with a SafeMath method.
 

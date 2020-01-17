@@ -1,6 +1,6 @@
 ---
 title: ¿Qué Comen Los Zombis?
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -103,15 +103,20 @@ Bueno lo que pasa es que a los CryptoZombies lo que les encanta comer es...
 
 (Sí, es enserio 😆 )
 
-Para hacer esto necesitamos leer el kittyDna del contrato inteligente CryptoKitties. Podemos hacer eso debido a que los datos de los CryptoKitties guardados en la blockchain son públicos. ¡¿No es blockchain genial?!
+Para hacer esto necesitamos leer el kittyDna del contrato inteligente
+CryptoKitties. Podemos hacer eso debido a que los datos de los CryptoKitties
+guardados en la blockchain son públicos. ¡¿No es blockchain genial?!
 
-No te preocupes - nuestro juego aún no va a hacer dañor a ningún CryptoKitty. Solo vamos a *leer* los datos de los CryptoKitties, no podemos borrarlos 😉
+No te preocupes - nuestro juego aún no va a hacer dañor a ningún CryptoKitty.
+Solo vamos a _leer_ los datos de los CryptoKitties, no podemos borrarlos 😉
 
 ## Interactuando con otros contratos
 
-Para que nuestro contrato pueda hablar a otro contrato de la blockchain que no poseemos, necesitamos definir una **_interfaz_**.
+Para que nuestro contrato pueda hablar a otro contrato de la blockchain que no
+poseemos, necesitamos definir una **_interfaz_**.
 
-Vamos a ver un simple ejemplo. Digamos que hay un contrato en la blockchain tal que así:
+Vamos a ver un simple ejemplo. Digamos que hay un contrato en la blockchain tal
+que así:
 
 ```
 contract LuckyNumber {
@@ -127,9 +132,12 @@ contract LuckyNumber {
 }
 ```
 
-Este seria un simple contrato donde cualquiera puede guardar su número de la suerte, y este estará asociado a su dirección de Ethereum. De esta forma cualquiera podría ver el número de la suerte de una persona usando su dirección.
+Este seria un simple contrato donde cualquiera puede guardar su número de la
+suerte, y este estará asociado a su dirección de Ethereum. De esta forma
+cualquiera podría ver el número de la suerte de una persona usando su dirección.
 
-Ahora digamos que tenemos un contrato externo que quiere leer la información de este contrato usando la función `getNum`. 
+Ahora digamos que tenemos un contrato externo que quiere leer la información de
+este contrato usando la función `getNum`.
 
 Primero debemos usar una **_interfaz_** del contrato `LuckyNumber`:
 
@@ -139,19 +147,32 @@ contract NumberInterface {
 }
 ```
 
-Ten en cuenta que esto se asemeja a definir un contrato, con alguna diferencia. Primero, solo declaramos las funciones con las que queremos interactuar - en este caso `getNum` — y no mencionamos ninguna otra función o variables de estado.
+Ten en cuenta que esto se asemeja a definir un contrato, con alguna diferencia.
+Primero, solo declaramos las funciones con las que queremos interactuar - en
+este caso `getNum` — y no mencionamos ninguna otra función o variables de
+estado.
 
-Segundo, no definimos el cuerpo de la función. En vez de usar las llaves (`{` y `}`), solamente terminaremos la función añadiendo un punto y coma al final de la declaración (`;`).
+Segundo, no definimos el cuerpo de la función. En vez de usar las llaves (`{` y
+`}`), solamente terminaremos la función añadiendo un punto y coma al final de la
+declaración (`;`).
 
-Sería como definir el esqueleto del contrato. Así es como conoce el compilador a las interfaces.
+Sería como definir el esqueleto del contrato. Así es como conoce el compilador a
+las interfaces.
 
-Incluyendo esta interfaz en el código de tu dapp nuestro contrato sabe como son las funciones de otro contrato, como llamarlas, y que tipo de respuesta recibiremos.
+Incluyendo esta interfaz en el código de tu dapp nuestro contrato sabe como son
+las funciones de otro contrato, como llamarlas, y que tipo de respuesta
+recibiremos.
 
-Entraremos en como llamar a las funciones de otros contratos en la siguiente lección, por ahora vamos a declarar nuestra interfaz para el contrato de CryptoKitties.
+Entraremos en como llamar a las funciones de otros contratos en la siguiente
+lección, por ahora vamos a declarar nuestra interfaz para el contrato de
+CryptoKitties.
 
 # Vamos a probarlo
 
-Hemos mirado el código fuente de CryptoKitties por tí, y hemos encontrado una función llamada `getKitty` que devuelve todos los datos de un kitty, incluyendo sus "genes" (¡qué es lo que nuestro juego de zombis necesita para crear un nuevo zombi!).
+Hemos mirado el código fuente de CryptoKitties por tí, y hemos encontrado una
+función llamada `getKitty` que devuelve todos los datos de un kitty, incluyendo
+sus "genes" (¡qué es lo que nuestro juego de zombis necesita para crear un nuevo
+zombi!).
 
 La función es así:
 
@@ -184,10 +205,16 @@ function getKitty(uint256 _id) external view returns (
 }
 ```
 
-La función parece algo diferente de las que hemos usado. Puedes ver que devuelve... una lista de diferentes valores. Si vienes de un lenguaje de programación como Javascript, esto es diferente - en Solidity puedes devolver más de un valor en una función.
+La función parece algo diferente de las que hemos usado. Puedes ver que
+devuelve... una lista de diferentes valores. Si vienes de un lenguaje de
+programación como Javascript, esto es diferente - en Solidity puedes devolver
+más de un valor en una función.
 
 Ahora que sabemos como es esta función, podemos usarla para crear una interfaz:
 
-1. Define una interfaz llamada `KittyInterface`. Recuerda, es como crear un nuevo contrato - usamos la palabra clave `contract`.
+1. Define una interfaz llamada `KittyInterface`. Recuerda, es como crear un
+   nuevo contrato - usamos la palabra clave `contract`.
 
-2. Dentro de la interfaz, define la función `getKitty` (que debería ser un copia/pega de la función de arriba, pero con un punto y coma después de los parámetros, en vez de todo lo que hay dentro de las llaves.
+2. Dentro de la interfaz, define la función `getKitty` (que debería ser un
+   copia/pega de la función de arriba, pero con un punto y coma después de los
+   parámetros, en vez de todo lo que hay dentro de las llaves.

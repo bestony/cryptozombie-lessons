@@ -1,6 +1,6 @@
 ---
 title: Zombie Victory 😄
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -177,81 +177,81 @@ material:
 
         }
       "ownable.sol": |
-       pragma solidity ^0.4.25;
+        pragma solidity ^0.4.25;
 
-        /**
-        * @title Ownable
-        * @dev The Ownable contract has an owner address, and provides basic authorization control
-        * functions, this simplifies the implementation of "user permissions".
-        */
-        contract Ownable {
-          address private _owner;
+         /**
+         * @title Ownable
+         * @dev The Ownable contract has an owner address, and provides basic authorization control
+         * functions, this simplifies the implementation of "user permissions".
+         */
+         contract Ownable {
+           address private _owner;
 
-          event OwnershipTransferred(
-            address indexed previousOwner,
-            address indexed newOwner
-          );
+           event OwnershipTransferred(
+             address indexed previousOwner,
+             address indexed newOwner
+           );
 
-          /**
-          * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-          * account.
-          */
-          constructor() internal {
-            _owner = msg.sender;
-            emit OwnershipTransferred(address(0), _owner);
-          }
+           /**
+           * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+           * account.
+           */
+           constructor() internal {
+             _owner = msg.sender;
+             emit OwnershipTransferred(address(0), _owner);
+           }
 
-          /**
-          * @return the address of the owner.
-          */
-          function owner() public view returns(address) {
-            return _owner;
-          }
+           /**
+           * @return the address of the owner.
+           */
+           function owner() public view returns(address) {
+             return _owner;
+           }
 
-          /**
-          * @dev Throws if called by any account other than the owner.
-          */
-          modifier onlyOwner() {
-            require(isOwner());
-            _;
-          }
+           /**
+           * @dev Throws if called by any account other than the owner.
+           */
+           modifier onlyOwner() {
+             require(isOwner());
+             _;
+           }
 
-          /**
-          * @return true if `msg.sender` is the owner of the contract.
-          */
-          function isOwner() public view returns(bool) {
-            return msg.sender == _owner;
-          }
+           /**
+           * @return true if `msg.sender` is the owner of the contract.
+           */
+           function isOwner() public view returns(bool) {
+             return msg.sender == _owner;
+           }
 
-          /**
-          * @dev Allows the current owner to relinquish control of the contract.
-          * @notice Renouncing to ownership will leave the contract without an owner.
-          * It will not be possible to call the functions with the `onlyOwner`
-          * modifier anymore.
-          */
-          function renounceOwnership() public onlyOwner {
-            emit OwnershipTransferred(_owner, address(0));
-            _owner = address(0);
-          }
+           /**
+           * @dev Allows the current owner to relinquish control of the contract.
+           * @notice Renouncing to ownership will leave the contract without an owner.
+           * It will not be possible to call the functions with the `onlyOwner`
+           * modifier anymore.
+           */
+           function renounceOwnership() public onlyOwner {
+             emit OwnershipTransferred(_owner, address(0));
+             _owner = address(0);
+           }
 
-          /**
-          * @dev Allows the current owner to transfer control of the contract to a newOwner.
-          * @param newOwner The address to transfer ownership to.
-          */
-          function transferOwnership(address newOwner) public onlyOwner {
-            _transferOwnership(newOwner);
-          }
+           /**
+           * @dev Allows the current owner to transfer control of the contract to a newOwner.
+           * @param newOwner The address to transfer ownership to.
+           */
+           function transferOwnership(address newOwner) public onlyOwner {
+             _transferOwnership(newOwner);
+           }
 
-          /**
-          * @dev Transfers control of the contract to a newOwner.
-          * @param newOwner The address to transfer ownership to.
-          */
-          function _transferOwnership(address newOwner) internal {
-            require(newOwner != address(0));
-            emit OwnershipTransferred(_owner, newOwner);
-            _owner = newOwner;
-          }
-        }
+           /**
+           * @dev Transfers control of the contract to a newOwner.
+           * @param newOwner The address to transfer ownership to.
+           */
+           function _transferOwnership(address newOwner) internal {
+             require(newOwner != address(0));
+             emit OwnershipTransferred(_owner, newOwner);
+             _owner = newOwner;
+           }
+         }
     answer: >
       pragma solidity ^0.4.25;
 
@@ -263,10 +263,12 @@ material:
 
         function randMod(uint _modulus) internal returns(uint) {
           randNonce++;
-          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % _modulus;
+          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) %
+      _modulus;
         }
 
-        function attack(uint _zombieId, uint _targetId) external ownerOf(_zombieId) {
+        function attack(uint _zombieId, uint _targetId) external
+      ownerOf(_zombieId) {
           Zombie storage myZombie = zombies[_zombieId];
           Zombie storage enemyZombie = zombies[_targetId];
           uint rand = randMod(100);
@@ -280,20 +282,28 @@ material:
       }
 ---
 
-Ahora que tenemos un `winCount` y  `lossCount`, podemos actualizarlos dependiendo de cuál zombie gane la pelea.
+Ahora que tenemos un `winCount` y `lossCount`, podemos actualizarlos dependiendo
+de cuál zombie gane la pelea.
 
-En el capítulo 6 calculamos un número aleatorio entre 0 y 100. Ahora utilicemos ese número para determinar quien gana la pelea y actualizar nuestras estadísticas apropiadamente.
+En el capítulo 6 calculamos un número aleatorio entre 0 y 100. Ahora utilicemos
+ese número para determinar quien gana la pelea y actualizar nuestras
+estadísticas apropiadamente.
 
 ## Póngalo a prueba
 
-1. Cree una declaración `if` que verifique si `rand` es **_menor o igual a_** `attackVictoryProbability`.
+1. Cree una declaración `if` que verifique si `rand` es **_menor o igual a_**
+   `attackVictoryProbability`.
 
 2. Si esta condición resulta verdadera ¡Nuestro zombie gana! Entonces:
 
-  a. Incrementa el `winCount` de `myZombie`.
+a. Incrementa el `winCount` de `myZombie`.
 
-  b. Incrementa el `level` de `myZombie`. (¡¡¡Sube de nivel!!!)
+b. Incrementa el `level` de `myZombie`. (¡¡¡Sube de nivel!!!)
 
-  c. Incrementa el `lossCount` del `enemyZombie`. (¡¡¡Perdedor!!! 😫 😫 😫)
+c. Incrementa el `lossCount` del `enemyZombie`. (¡¡¡Perdedor!!! 😫 😫 😫)
 
-  d. Ejecute la función `feedAndMultiply`. Revise `zombiefeeding.sol` para que vea la sintaxis para llamarlo. Para el 3er argumento (`_species`), pase la cadena de caracteres `"zombie"`. (Esto no hace nada ahora mismo, pero luego podríamos añadir un poco más de funcionalidad para generar zombies tipo "zombie-based" si lo deseamos)
+d. Ejecute la función `feedAndMultiply`. Revise `zombiefeeding.sol` para que vea
+la sintaxis para llamarlo. Para el 3er argumento (`_species`), pase la cadena de
+caracteres `"zombie"`. (Esto no hace nada ahora mismo, pero luego podríamos
+añadir un poco más de funcionalidad para generar zombies tipo "zombie-based" si
+lo deseamos)

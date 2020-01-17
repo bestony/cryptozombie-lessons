@@ -1,6 +1,6 @@
 ---
 title: Usando una Interfaz
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -114,7 +114,8 @@ material:
       }
 ---
 
-Continuando con nuestro ejemplo anterior de `NumberInterface`, una vez hemos definido la interfaz como:
+Continuando con nuestro ejemplo anterior de `NumberInterface`, una vez hemos
+definido la interfaz como:
 
 ```
 contract NumberInterface {
@@ -126,7 +127,7 @@ Podemos usarla en el contrato de esta manera:
 
 ```
 contract MyContract {
-  address NumberInterfaceAddress = 0xab38... 
+  address NumberInterfaceAddress = 0xab38...
   // ^ La dirección del contrato FavoriteNumber en Ethereum
   NumberInterface numberContract = NumberInterface(NumberInterfaceAddress)
   // Ahora `numberContract` está apuntando al otro contrato
@@ -139,10 +140,16 @@ contract MyContract {
 }
 ```
 
-De esta manera, tu contrato puede interactuar con otro contrato de la blockchain de Ethereum, siempre y cuando la función esté definida como `public` o `external`.
+De esta manera, tu contrato puede interactuar con otro contrato de la blockchain
+de Ethereum, siempre y cuando la función esté definida como `public` o
+`external`.
 
 # Vamos a probarlo
 
-¡Vamos a preparar nuestro contrato para leer el contrato inteligente de CryptoKitties!
+¡Vamos a preparar nuestro contrato para leer el contrato inteligente de
+CryptoKitties!
 
-1. He guardado la dirección del contrato de CryptoKitties en el código por ti, dentro de la variable `ckAddress`. En la siguiente línea, crea una`KittyInterface` llamada `kittyContract`, e inicializala con `ckAddress` — igual que como hemos hecho con `numberContract` arriba.
+1. He guardado la dirección del contrato de CryptoKitties en el código por ti,
+   dentro de la variable `ckAddress`. En la siguiente línea, crea
+   una`KittyInterface` llamada `kittyContract`, e inicializala con `ckAddress` —
+   igual que como hemos hecho con `numberContract` arriba.

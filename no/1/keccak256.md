@@ -1,6 +1,6 @@
 ---
 title: Keccak256 og Typecasting
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -56,11 +56,15 @@ material:
       }
 ---
 
-Vi vil at funksjonen vår `_generateRandomDna` skal returnere en (semi) tilfeldig `uint`. Hvordan kan vi oppnå dette?
+Vi vil at funksjonen vår `_generateRandomDna` skal returnere en (semi) tilfeldig
+`uint`. Hvordan kan vi oppnå dette?
 
-Ethereum har hash-funksjonen `keccak256` bygget inn, som er en versjon av SHA3. En hash-funksjon tar en input-string og gjør den om til et 256-bit hexadecimal nummmer. En liten endring i string-en vil gjøre at hele hashen blir endret.
+Ethereum har hash-funksjonen `keccak256` bygget inn, som er en versjon av SHA3.
+En hash-funksjon tar en input-string og gjør den om til et 256-bit hexadecimal
+nummmer. En liten endring i string-en vil gjøre at hele hashen blir endret.
 
-Det er nyttig for mange formål i Ethereum, men akkuratt nå kommer vi til å bruke det bare for å lage et pseudo-tilfeldig nummer.
+Det er nyttig for mange formål i Ethereum, men akkuratt nå kommer vi til å bruke
+det bare for å lage et pseudo-tilfeldig nummer.
 
 Eksempel:
 
@@ -71,29 +75,39 @@ keccak256("aaaab");
 keccak256("aaaac");
 ```
 
-Som du kan se,den returnerte verdien er helt annerledes fra den første selv bare med én bokstav-endring.
+Som du kan se,den returnerte verdien er helt annerledes fra den første selv bare
+med én bokstav-endring.
 
-> Noter: **Sikker** tilfeldig nummer generering i blockchain er et veldig vanskelig problem. Vår metode her er usikker,men siden sikkerhet ikke er vår største prioritet i vårt Zombie DNA, er det godt nok for vårt bruk.
+> Noter: **Sikker** tilfeldig nummer generering i blockchain er et veldig
+> vanskelig problem. Vår metode her er usikker,men siden sikkerhet ikke er vår
+> største prioritet i vårt Zombie DNA, er det godt nok for vårt bruk.
 
 ## Typecasting
 
-Noen ganger kan det være greit å konvertere mellom data typer. Ta det følgende eksempelet:
+Noen ganger kan det være greit å konvertere mellom data typer. Ta det følgende
+eksempelet:
 
 ```
 uint8 a = 5;
 uint b = 6;
 // returnerer en feil fordi a * b returnerer som uint, ikke uint8:
-uint8 c = a * b; 
+uint8 c = a * b;
 // vi må typecaste b som en uint8 for å få det til å fungere:
-uint8 c = a * uint8(b); 
+uint8 c = a * uint8(b);
 ```
 
-Over, returneres `a * b` som `uint`, men vi prøver å lagre som  `uint8`, noe som potensielt kan gi oss problemer. Ved å caste som `uint8`, kompileres b som en uint8 og vi unngår problemer.
+Over, returneres `a * b` som `uint`, men vi prøver å lagre som `uint8`, noe som
+potensielt kan gi oss problemer. Ved å caste som `uint8`, kompileres b som en
+uint8 og vi unngår problemer.
 
 # Test det
 
 La oss fylle inn funksjonen vår `_generateRandomDna`! Der er det du bør gjøre:
 
-1. Den første linjen med kode bør ta `keccak256` hashen av `_str` for å generere et pseudo-tilfeldig hexadecimal, typecast den som en `uint`, og lagre til slutt resultatet som en `uint` kalt `rand`.
+1. Den første linjen med kode bør ta `keccak256` hashen av `_str` for å generere
+   et pseudo-tilfeldig hexadecimal, typecast den som en `uint`, og lagre til
+   slutt resultatet som en `uint` kalt `rand`.
 
-2. Vi vil at DNA-et vårt skal være 16 sifre langt (husker du `dnaModulus`-en vår?). Så andre linje med kode burde `return`-e verdien returnert over i  modulus (`%`) `dnaModulus`.
+2. Vi vil at DNA-et vårt skal være 16 sifre langt (husker du `dnaModulus`-en
+   vår?). Så andre linje med kode burde `return`-e verdien returnert over i
+   modulus (`%`) `dnaModulus`.

@@ -1,6 +1,6 @@
 ---
 title: Msg.sender
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -82,15 +82,22 @@ material:
       }
 ---
 
-Ahora que tenemos nuestros mapeos para seguir el rastro del propietario de un zombi, queremos actualizar el metodo `_createZombie` para que los utilice.
+Ahora que tenemos nuestros mapeos para seguir el rastro del propietario de un
+zombi, queremos actualizar el metodo `_createZombie` para que los utilice.
 
 Para poder hacer esto, necesitamos algo llamado `msg.sender`.
 
 ## msg.sender
 
-En Solidity, hay una serie de variables globales que están disponibles para todas las funciones. Una de estas es `msg.sender`, que hace referencia a la `dirección` de la persona (o el contrato inteligente) que ha llamado a esa función.
+En Solidity, hay una serie de variables globales que están disponibles para
+todas las funciones. Una de estas es `msg.sender`, que hace referencia a la
+`dirección` de la persona (o el contrato inteligente) que ha llamado a esa
+función.
 
-> Nota: En Solidity, la ejecución de una función necesita empezar con una llamada exterior. Un contrato se sentará en la blockchain sin hacer nada esperando a que alguien llame a una de sus funciones. Así que siempre habrá un `msg.sender`.
+> Nota: En Solidity, la ejecución de una función necesita empezar con una
+> llamada exterior. Un contrato se sentará en la blockchain sin hacer nada
+> esperando a que alguien llame a una de sus funciones. Así que siempre habrá un
+> `msg.sender`.
 
 Aquí tenemos un ejemplo de como usar `msg.sender` y actualizar un `mapping`:
 
@@ -110,17 +117,23 @@ function whatIsMyNumber() public view returns (uint) {
 }
 ```
 
-En este trivial ejemplo, cualquiera puede llamar a `setMyNumber` y guardar un `uint` en nuestro contrato, que estará atado a su dirección. Entonces, cuando llamen a `whatIsMyNumber`, debería devolverles el `uint` que han guardado.
+En este trivial ejemplo, cualquiera puede llamar a `setMyNumber` y guardar un
+`uint` en nuestro contrato, que estará atado a su dirección. Entonces, cuando
+llamen a `whatIsMyNumber`, debería devolverles el `uint` que han guardado.
 
-Usando `msg.sender` te da la seguridad de la blockchain de Ethereum  — la única forma de que otra persona edite la información de esta sería robandole la clave privada asociada a la dirección Ethereum.
+Usando `msg.sender` te da la seguridad de la blockchain de Ethereum — la única
+forma de que otra persona edite la información de esta sería robandole la clave
+privada asociada a la dirección Ethereum.
 
 # Vamos a probarlo
 
-Vamos a actualizar nuestro método `_createZombie` de la Lección para asignarle la propiedad de un zombi a quien llame a la función.
+Vamos a actualizar nuestro método `_createZombie` de la Lección para asignarle
+la propiedad de un zombi a quien llame a la función.
 
-1. Primero, después de recibir la `id` del nuevo zombi, actualizamos nuestro mapeo `zombieToOwner` para que guarde `msg.sender` bajo esa `id`.
+1. Primero, después de recibir la `id` del nuevo zombi, actualizamos nuestro
+   mapeo `zombieToOwner` para que guarde `msg.sender` bajo esa `id`.
 
-2. Segundo, incrementamos `ownerZombieCount` para este `msg.sender`. 
+2. Segundo, incrementamos `ownerZombieCount` para este `msg.sender`.
 
 En Solidity, puedes incrementar un `uint` con `++`, así como en javascript:
 

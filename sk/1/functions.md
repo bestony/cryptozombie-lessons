@@ -1,6 +1,6 @@
 ---
 title: Deklarácia Funkcií
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -53,9 +53,13 @@ function eatHamburgers(string _name, uint _amount) {
 }
 ```
 
-Toto je funkcia s menom `eatHamburgers`, ktorá berie 2 argumenty: `string` a `uint`. Telo funkcie je zatiaľ prázdne.
+Toto je funkcia s menom `eatHamburgers`, ktorá berie 2 argumenty: `string` a
+`uint`. Telo funkcie je zatiaľ prázdne.
 
-> Note: Je konvenciou (ale nie nutnosť) začínať názvy funkčných argumentov názvami premenných a podtržítkom (`_`) na to, aby sme ich odlíšili od globálnych premenných. V priebehu tohoto tutoriálu však budeme túto konvenciu používať.
+> Note: Je konvenciou (ale nie nutnosť) začínať názvy funkčných argumentov
+> názvami premenných a podtržítkom (`_`) na to, aby sme ich odlíšili od
+> globálnych premenných. V priebehu tohoto tutoriálu však budeme túto konvenciu
+> používať.
 
 Predošlú funkciu by sme zavolali takto:
 
@@ -65,8 +69,10 @@ eatHamburgers("vitalik", 100);
 
 # Vyskúšaj si to sám
 
-V našej aplikácií potrebujeme byť schopný vytvárať Zombies. Poďme si na to napísať funkciu.
+V našej aplikácií potrebujeme byť schopný vytvárať Zombies. Poďme si na to
+napísať funkciu.
 
-1. Vytvor funkciu pomenovanú `createZombie`. Mala by príjmať dva parametre. **\_name** (typu `string`) a **\_dna** (typu `uint`).
+1. Vytvor funkciu pomenovanú `createZombie`. Mala by príjmať dva parametre.
+   **\_name** (typu `string`) a **\_dna** (typu `uint`).
 
 Telo funkcie zatiaľ necháme prázdne - doplníme ho neskôr.

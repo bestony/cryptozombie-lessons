@@ -1,6 +1,6 @@
 ---
 title: 第8课完成啦!
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   lessonComplete:
     answer: 1
@@ -14,8 +14,9 @@ material:
 
 现在只有你想不到的……
 
-在不久的将来，你将能使用我们的“僵尸战场” 自定义游戏创建工具把自己的智能合约直接部署到Loom GameChain —— 每个“僵尸战场”玩家都可以加载你的游戏模式来玩！
+在不久的将来，你将能使用我们的“僵尸战场” 自定义游戏创建工具把自己的智能合约直接
+部署到 Loom GameChain —— 每个“僵尸战场”玩家都可以加载你的游戏模式来玩！
 
-你现在可以抢占先机，开始好好想想你的自定义游戏模式并编写Solidity合约。
+你现在可以抢占先机，开始好好想想你的自定义游戏模式并编写 Solidity 合约。
 
 一旦游戏创建工具上线，我们会立即通知你哦！

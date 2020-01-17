@@ -1,6 +1,6 @@
 ---
 title: SafeMath Part 2
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -12,7 +12,7 @@ material:
         import "./zombieattack.sol";
         import "./erc721.sol";
         import "./safemath.sol";
-        
+
         contract ZombieOwnership is ZombieAttack, ERC721 {
 
           using SafeMath for uint256;
@@ -445,7 +445,11 @@ library SafeMath {
 }
 ```
 
-Primero, tenemos la palabra clave reservada `library `— las librerías son similares a los `contract`s pero con algunas diferencias. Para nuestros propósitos, las librerías nos permiten usar la palabra clave reservada `using`, que automáticamente asocia a todos los métodos de la librería con unos tipos de datos:
+Primero, tenemos la palabra clave reservada `library`— las librerías son
+similares a los `contract`s pero con algunas diferencias. Para nuestros
+propósitos, las librerías nos permiten usar la palabra clave reservada `using`,
+que automáticamente asocia a todos los métodos de la librería con unos tipos de
+datos:
 
 ```
 using SafeMath for uint;
@@ -455,7 +459,9 @@ test = test.mul(3); // test now equals 6
 test = test.add(5); // test now equals 11
 ```
 
-Fíjese que las funciones `mul` y `add` requieren dos parámetros de entrada, pero cuando declaramos `using SafeMath for uint`, el `uint` al que llamamos en la función (`test`) se pasa automáticamente como parámetro.
+Fíjese que las funciones `mul` y `add` requieren dos parámetros de entrada, pero
+cuando declaramos `using SafeMath for uint`, el `uint` al que llamamos en la
+función (`test`) se pasa automáticamente como parámetro.
 
 Veamos el código que tiene `add` para ver qué hace SafeMath:
 
@@ -467,15 +473,26 @@ function add(uint256 a, uint256 b) internal pure returns (uint256) {
 }
 ```
 
-Básicamente `add` suma 2 valores `uint`s como hace el símbolo  `+`, pero también contiene una declaración `assert` para asegurarse de que la suma sea mayor que  `a`. Esto nos protege de desbordamientos por exceso (overflows).
+Básicamente `add` suma 2 valores `uint`s como hace el símbolo `+`, pero también
+contiene una declaración `assert` para asegurarse de que la suma sea mayor que
+`a`. Esto nos protege de desbordamientos por exceso (overflows).
 
-`assert` es similar a `require`, donde lanzará un error si es falso. La diferencia entre `assert` y `require` es que `require` devolverá al usuario el resto del gas cuando la función falle, mientras que `assert` no lo hará. Por lo tanto, la mayor parte del tiempo deseará utilizar `require` en su código; `assert` se usará normalmente sólo cuando algo ha ido terriblemente mal con el código (como un desbordamiento en `uint`).
+`assert` es similar a `require`, donde lanzará un error si es falso. La
+diferencia entre `assert` y `require` es que `require` devolverá al usuario el
+resto del gas cuando la función falle, mientras que `assert` no lo hará. Por lo
+tanto, la mayor parte del tiempo deseará utilizar `require` en su código;
+`assert` se usará normalmente sólo cuando algo ha ido terriblemente mal con el
+código (como un desbordamiento en `uint`).
 
-Entonces, en pocas palabras, las funciones de SafeMath's de `add`, `sub`, `mul`, y`div` son funciones que realizan las 4 operaciones básicas de matemáticas, pero lanzan un error si ocurre un desbordamiento por exceso o por defecto.
+Entonces, en pocas palabras, las funciones de SafeMath's de `add`, `sub`, `mul`,
+y`div` son funciones que realizan las 4 operaciones básicas de matemáticas, pero
+lanzan un error si ocurre un desbordamiento por exceso o por defecto.
 
 ### Usando SafeMath en nuestro código.
 
-Para evitar el desbordamiento, podemos buscar en nuestro código los lugares donde se utilicen `+`, `-`, `*`, o `/`, y sustituirlos por `add`, `sub`, `mul`, `div`.
+Para evitar el desbordamiento, podemos buscar en nuestro código los lugares
+donde se utilicen `+`, `-`, `*`, o `/`, y sustituirlos por `add`, `sub`, `mul`,
+`div`.
 
 Ejemplo. En lugar de escribir:
 
@@ -491,7 +508,8 @@ myUint = myUint.add(1);
 
 ## Póngalo a prueba
 
-Tenemos dos sitios en `ZombieOwnership` donde se hacen operaciones matemáticas. Vamos a sustituirlos por los métodos que proporciona SafeMath.
+Tenemos dos sitios en `ZombieOwnership` donde se hacen operaciones matemáticas.
+Vamos a sustituirlos por los métodos que proporciona SafeMath.
 
 1. Reemplace `++` por su método correspondiente de SafeMath.
 

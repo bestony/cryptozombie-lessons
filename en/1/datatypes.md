@@ -1,6 +1,6 @@
 ---
 title: State Variables & Integers
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -23,11 +23,14 @@ material:
       }
 ---
 
-Great job! Now that we've got a shell for our contract, let's learn about how Solidity deals with variables.
+Great job! Now that we've got a shell for our contract, let's learn about how
+Solidity deals with variables.
 
-**_State variables_** are permanently stored in contract storage. This means they're written to the Ethereum blockchain. Think of them like writing to a DB.
+**_State variables_** are permanently stored in contract storage. This means
+they're written to the Ethereum blockchain. Think of them like writing to a DB.
 
 ##### Example:
+
 ```
 contract Example {
   // This will be stored permanently in the blockchain
@@ -35,13 +38,18 @@ contract Example {
 }
 ```
 
-In this example contract, we created a `uint` called `myUnsignedInteger` and set it equal to 100.
+In this example contract, we created a `uint` called `myUnsignedInteger` and set
+it equal to 100.
 
 ## Unsigned Integers: `uint`
 
-The `uint` data type is an unsigned integer, meaning **its value must be non-negative**. There's also an `int` data type for signed integers.
+The `uint` data type is an unsigned integer, meaning **its value must be
+non-negative**. There's also an `int` data type for signed integers.
 
-> Note: In Solidity, `uint` is actually an alias for `uint256`, a 256-bit unsigned integer. You can declare uints with less bits — `uint8`, `uint16`, `uint32`, etc.. But in general you want to simply use `uint` except in specific cases, which we'll talk about in later lessons.
+> Note: In Solidity, `uint` is actually an alias for `uint256`, a 256-bit
+> unsigned integer. You can declare uints with less bits — `uint8`, `uint16`,
+> `uint32`, etc.. But in general you want to simply use `uint` except in
+> specific cases, which we'll talk about in later lessons.
 
 # Put it to the test
 

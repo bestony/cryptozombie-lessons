@@ -8,6 +8,8 @@ Ouf ! Ça commence à chauffer ici...
 
 Dans cette leçon, nous allons apprendre des choses un peu plus complexes.
 
-Nous allons parler des **jetons (tokens)**, du standard **ERC721**, et des **actifs crypto-collectibles**.
+Nous allons parler des **jetons (tokens)**, du standard **ERC721**, et des
+**actifs crypto-collectibles**.
 
-En d'autres termes, nous allons **faire en sorte que vous puissiez échanger vos zombies avec vos amis.**
+En d'autres termes, nous allons **faire en sorte que vous puissiez échanger vos
+zombies avec vos amis.**

@@ -1,6 +1,6 @@
 ---
 title: Modificadores de Zombis
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -113,81 +113,81 @@ material:
 
         }
       "ownable.sol": |
-       pragma solidity ^0.4.25;
+        pragma solidity ^0.4.25;
 
-          /**
-          * @title Ownable
-          * @dev The Ownable contract has an owner address, and provides basic authorization control
-          * functions, this simplifies the implementation of "user permissions".
-          */
-          contract Ownable {
-            address private _owner;
+           /**
+           * @title Ownable
+           * @dev The Ownable contract has an owner address, and provides basic authorization control
+           * functions, this simplifies the implementation of "user permissions".
+           */
+           contract Ownable {
+             address private _owner;
 
-            event OwnershipTransferred(
-              address indexed previousOwner,
-              address indexed newOwner
-            );
+             event OwnershipTransferred(
+               address indexed previousOwner,
+               address indexed newOwner
+             );
 
-            /**
-            * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-            * account.
-            */
-            constructor() internal {
-              _owner = msg.sender;
-              emit OwnershipTransferred(address(0), _owner);
-            }
+             /**
+             * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+             * account.
+             */
+             constructor() internal {
+               _owner = msg.sender;
+               emit OwnershipTransferred(address(0), _owner);
+             }
 
-            /**
-            * @return the address of the owner.
-            */
-            function owner() public view returns(address) {
-              return _owner;
-            }
+             /**
+             * @return the address of the owner.
+             */
+             function owner() public view returns(address) {
+               return _owner;
+             }
 
-            /**
-            * @dev Throws if called by any account other than the owner.
-            */
-            modifier onlyOwner() {
-              require(isOwner());
-              _;
-            }
+             /**
+             * @dev Throws if called by any account other than the owner.
+             */
+             modifier onlyOwner() {
+               require(isOwner());
+               _;
+             }
 
-            /**
-            * @return true if `msg.sender` is the owner of the contract.
-            */
-            function isOwner() public view returns(bool) {
-              return msg.sender == _owner;
-            }
+             /**
+             * @return true if `msg.sender` is the owner of the contract.
+             */
+             function isOwner() public view returns(bool) {
+               return msg.sender == _owner;
+             }
 
-            /**
-            * @dev Allows the current owner to relinquish control of the contract.
-            * @notice Renouncing to ownership will leave the contract without an owner.
-            * It will not be possible to call the functions with the `onlyOwner`
-            * modifier anymore.
-            */
-            function renounceOwnership() public onlyOwner {
-              emit OwnershipTransferred(_owner, address(0));
-              _owner = address(0);
-            }
+             /**
+             * @dev Allows the current owner to relinquish control of the contract.
+             * @notice Renouncing to ownership will leave the contract without an owner.
+             * It will not be possible to call the functions with the `onlyOwner`
+             * modifier anymore.
+             */
+             function renounceOwnership() public onlyOwner {
+               emit OwnershipTransferred(_owner, address(0));
+               _owner = address(0);
+             }
 
-            /**
-            * @dev Allows the current owner to transfer control of the contract to a newOwner.
-            * @param newOwner The address to transfer ownership to.
-            */
-            function transferOwnership(address newOwner) public onlyOwner {
-              _transferOwnership(newOwner);
-            }
+             /**
+             * @dev Allows the current owner to transfer control of the contract to a newOwner.
+             * @param newOwner The address to transfer ownership to.
+             */
+             function transferOwnership(address newOwner) public onlyOwner {
+               _transferOwnership(newOwner);
+             }
 
-            /**
-            * @dev Transfers control of the contract to a newOwner.
-            * @param newOwner The address to transfer ownership to.
-            */
-            function _transferOwnership(address newOwner) internal {
-              require(newOwner != address(0));
-              emit OwnershipTransferred(_owner, newOwner);
-              _owner = newOwner;
-            }
-          }
+             /**
+             * @dev Transfers control of the contract to a newOwner.
+             * @param newOwner The address to transfer ownership to.
+             */
+             function _transferOwnership(address newOwner) internal {
+               require(newOwner != address(0));
+               emit OwnershipTransferred(_owner, newOwner);
+               _owner = newOwner;
+             }
+           }
     answer: >
       pragma solidity ^0.4.25;
 
@@ -200,12 +200,14 @@ material:
           _;
         }
 
-        function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) {
+        function changeName(uint _zombieId, string _newName) external
+      aboveLevel(2, _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].name = _newName;
         }
 
-        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) {
+        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20,
+      _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].dna = _newDna;
         }
@@ -215,12 +217,16 @@ material:
 
 Ahora vamos a usar nuestro modificador `aboveLevel`para crear algunas funciones.
 
-Nuestro juego tendrá algunos incentivos para la gente que suba de nivel a sus zombis:
+Nuestro juego tendrá algunos incentivos para la gente que suba de nivel a sus
+zombis:
 
-- Para los zombis de nivel 2 y superior, los usuarios podrán cambiarle el nombre.
-- Para los zombis de nivel 20 y superior, los usarios podrán darle un ADN personalizado.
+- Para los zombis de nivel 2 y superior, los usuarios podrán cambiarle el
+  nombre.
+- Para los zombis de nivel 20 y superior, los usarios podrán darle un ADN
+  personalizado.
 
-Vamos a implementar estas funciones abajo. Aquí tienes un ejemplo de la lección anterior como referencia:
+Vamos a implementar estas funciones abajo. Aquí tienes un ejemplo de la lección
+anterior como referencia:
 
 ```
 // Un mapeo para guardar la edad del usuario:
@@ -240,10 +246,18 @@ function driveCar(uint _userId) public olderThan(16, _userId) {
 
 ## Vamos a probarlo
 
-1. Crea una función llamada `changeName`. Esta recibirá 2 argumentos: `_zombieId` (un `uint`), y `_newName` (un `string`), y hazla `external`. Esta deberá tener el modificador `aboveLevel`, y le pasará `2` como parámetro `_level`. (No te olvides de pasarle el `_zombieId` también).
+1. Crea una función llamada `changeName`. Esta recibirá 2 argumentos:
+   `_zombieId` (un `uint`), y `_newName` (un `string`), y hazla `external`. Esta
+   deberá tener el modificador `aboveLevel`, y le pasará `2` como parámetro
+   `_level`. (No te olvides de pasarle el `_zombieId` también).
 
-2. En esta función, primero tenemos que verificar que el `msg.sender` es igual a `zombieToOwner[_zombieId]`. Utiliza una sentencia `require`.
+2. En esta función, primero tenemos que verificar que el `msg.sender` es igual a
+   `zombieToOwner[_zombieId]`. Utiliza una sentencia `require`.
 
 3. Después la función deberá fijar `zombies[_zombieId].name` como `_newName`.
 
-4. Crea otra función llamada `changeDna` debajo de `changeName`. Su definición y contenido tendrá que ser igual que el de `changeName`, a excepción de su segundo argumento que será `_newDna` (un `uint`), y debemos pasarle `20` para el parámetro `_level` en el modificador `aboveLevel`. Y por supuesto, este deberá fijar el `dna` del zombi a `_newDna` en vez de cambiarle el nombre.
+4. Crea otra función llamada `changeDna` debajo de `changeName`. Su definición y
+   contenido tendrá que ser igual que el de `changeName`, a excepción de su
+   segundo argumento que será `_newDna` (un `uint`), y debemos pasarle `20` para
+   el parámetro `_level` en el modificador `aboveLevel`. Y por supuesto, este
+   deberá fijar el `dna` del zombi a `_newDna` en vez de cambiarle el nombre.

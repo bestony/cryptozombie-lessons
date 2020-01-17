@@ -1,6 +1,6 @@
 ---
 title: 別の関数とビジビリティ
-actions: ['答え合わせ', 'ヒント']
+actions: ["答え合わせ", "ヒント"]
 material:
   editor:
     language: sol
@@ -106,18 +106,24 @@ material:
 
 コンパイルしようとしたら、エラーが出たはずだ。
 
-`ZombieFeeding`から`_createZombie`関数を呼び出そうとした部分が問題の部分だが、`_createZombie`は`ZombieFactory`の中にある`private`関数だ。といえばわかるよな。そうだ。 `ZombieFactory`から継承したコントラクトではアクセスできないということだ。
+`ZombieFeeding`から`_createZombie`関数を呼び出そうとした部分が問題の部分だが
+、`_createZombie`は`ZombieFactory`の中にある`private`関数だ。といえばわかるよな
+。そうだ。 `ZombieFactory`から継承したコントラクトではアクセスできないということ
+だ。
 
 ## Internal と External
 
-Solidityには`public` と`private`の他に、`internal` と `external`という関数用のビジビリティが用意されているのだ。
+Solidity には`public` と`private`の他に、`internal` と `external`という関数用の
+ビジビリティが用意されているのだ。
 
-`internal`は`private`と同じだが、このコントラクトから継承したコントラクトにもアクセスできるようになる。 **(そうだ！これが我々に必要なものだ)**。
+`internal`は`private`と同じだが、このコントラクトから継承したコントラクトにもア
+クセスできるようになる。 **(そうだ！これが我々に必要なものだ)**。
 
-`external`は `public`と同じだが、コントラクトの外からだけ呼び出すことができるのだ。つまりコントラクト内部の別の関数では呼び出すことができないものだ。
+`external`は `public`と同じだが、コントラクトの外からだけ呼び出すことができるの
+だ。つまりコントラクト内部の別の関数では呼び出すことができないものだ。
 `external` と `public`のどちらを使ったらいいのかという説明はあとでするからな。
 
- `internal` と `external`の関数宣言は `private` や `public`の宣言方法と同じだ：
+`internal` と `external`の関数宣言は `private` や `public`の宣言方法と同じだ：
 
 ```
 contract Sandwich {
@@ -141,6 +147,7 @@ contract BLT is Sandwich {
 
 # それではテストだ
 
-1. `_createZombie()` を`private` から `internal`に変更して、他のコントラクトからアクセスできるようにせよ。
+1. `_createZombie()` を`private` から `internal`に変更して、他のコントラクトから
+   アクセスできるようにせよ。
 
-  `zombiefactory.sol`のタブを使うのだぞ。
+`zombiefactory.sol`のタブを使うのだぞ。

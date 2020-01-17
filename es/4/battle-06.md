@@ -1,6 +1,6 @@
 ---
 title: ¡De Vuelta al Ataque!
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -260,10 +260,12 @@ material:
 
         function randMod(uint _modulus) internal returns(uint) {
           randNonce++;
-          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % _modulus;
+          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) %
+      _modulus;
         }
 
-        function attack(uint _zombieId, uint _targetId) external ownerOf(_zombieId) {
+        function attack(uint _zombieId, uint _targetId) external
+      ownerOf(_zombieId) {
           Zombie storage myZombie = zombies[_zombieId];
           Zombie storage enemyZombie = zombies[_targetId];
           uint rand = randMod(100);
@@ -273,16 +275,24 @@ material:
 
 Suficiente refactorización — regresemos a `zombieattack.sol`.
 
-Vamos a continuar definiendo nuestra función `attack`, ahora que tenemos el modificador `ownerOf` para ser utilizado.
+Vamos a continuar definiendo nuestra función `attack`, ahora que tenemos el
+modificador `ownerOf` para ser utilizado.
 
 ## Póngalo a prueba
 
-1. Añada el modificador `ownerOf` a `attack` para asegurar que el que llame posea `_zombieId`.
+1. Añada el modificador `ownerOf` a `attack` para asegurar que el que llame
+   posea `_zombieId`.
 
-2. Lo primero que nuestra función debería hacer es conseguirles un puntero de `storage` a ambos zombies para poder interactuar con ellos más facilmente:
+2. Lo primero que nuestra función debería hacer es conseguirles un puntero de
+   `storage` a ambos zombies para poder interactuar con ellos más facilmente:
 
-  a. Anuncie un `Zombie storage` llamado `myZombie` y configurelo como igual a `zombies[_zombieId]`.
+a. Anuncie un `Zombie storage` llamado `myZombie` y configurelo como igual a
+`zombies[_zombieId]`.
 
-  b. Anuncie un `Zombie storage` llamado `enemyZombie` y configurelo como igual a `zombies[_targetId]`.
+b. Anuncie un `Zombie storage` llamado `enemyZombie` y configurelo como igual a
+`zombies[_targetId]`.
 
-3. Vamos a utilizar un número aleatorio entre 0 y 99 para determinar el resultado de nuestra batalla. Entonces anuncie un `uint` llamado `rand` y configurelo para que sea igual al resultado de la función `randMod` con `100` como un argumento.
+3. Vamos a utilizar un número aleatorio entre 0 y 99 para determinar el
+   resultado de nuestra batalla. Entonces anuncie un `uint` llamado `rand` y
+   configurelo para que sea igual al resultado de la función `randMod` con `100`
+   como un argumento.

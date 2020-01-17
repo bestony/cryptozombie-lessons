@@ -1,6 +1,6 @@
 ---
 title: Attackへ戻ろう!
-actions: ['答え合わせ', 'ヒント']
+actions: ["答え合わせ", "ヒント"]
 requireLogin: true
 material:
   editor:
@@ -222,7 +222,8 @@ material:
           return uint(keccak256(now, msg.sender, randNonce)) % _modulus;
         }
 
-        function attack(uint _zombieId, uint _targetId) external ownerOf(_zombieId) {
+        function attack(uint _zombieId, uint _targetId) external
+      ownerOf(_zombieId) {
           Zombie storage myZombie = zombies[_zombieId];
           Zombie storage enemyZombie = zombies[_targetId];
           uint rand = randMod(100);
@@ -236,12 +237,18 @@ material:
 
 ## さあテストだ
 
-1. `ownerOf`修飾子を`attack`関数に加え、関数を呼び出した者が`_zombieId`を所有しているか確認せよ。
+1. `ownerOf`修飾子を`attack`関数に加え、関数を呼び出した者が`_zombieId`を所有し
+   ているか確認せよ。
 
-2. まず最初に、我々の関数は両方のゾンビに`storage`のポインタをゲットしなくてはならない。そうするとより簡単にそれらとやり取りできる。
+2. まず最初に、我々の関数は両方のゾンビに`storage`のポインタをゲットしなくてはな
+   らない。そうするとより簡単にそれらとやり取りできる。
 
-  a. `myZombie`という名の`Zombie storage`を宣言せよ。そしてそれが`zombies[_zombieId]`と等しくなるよう設定するのだ。
+a. `myZombie`という名の`Zombie storage`を宣言せよ。そしてそれ
+が`zombies[_zombieId]`と等しくなるよう設定するのだ。
 
-  b. `enemyZombie`という名の`Zombie storage`を宣言し、そしてそれが`zombies[_targetId]`と等しくなるよう設定せよ。
+b. `enemyZombie`という名の`Zombie storage`を宣言し、そしてそれ
+が`zombies[_targetId]`と等しくなるよう設定せよ。
 
-3. バトルの結果を決めるために、0から99のランダムな数字を使っていく。そのため`rand`という名前の`uint`を宣言し、これが引数を100とした`randMod`関数と同等であるよう設定せよ。
+3. バトルの結果を決めるために、0 から 99 のランダムな数字を使っていく。そのた
+   め`rand`という名前の`uint`を宣言し、これが引数を 100 とした`randMod`関数と同
+   等であるよう設定せよ。

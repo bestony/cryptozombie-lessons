@@ -1,6 +1,6 @@
 ---
 title: Números Aleatorios
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -249,24 +249,24 @@ material:
 
         function randMod(uint _modulus) internal returns(uint) {
           randNonce++;
-          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % _modulus;
+          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) %
+      _modulus;
         }
       }
+---¡Grandioso! Ahora descifremos la lógica de batalla
 
+Todo buen juego necesita algún nivel de aleatoriedad. Entonces ¿Cómo generamos
+números aleatorios en Solidity?
 
----
-
-¡Grandioso! Ahora descifremos la lógica de batalla
-
-Todo buen juego necesita algún nivel de aleatoriedad. Entonces ¿Cómo generamos números aleatorios en Solidity?
-
-La respuesta correcta es que no puede. Bueno, al menos no puede hacerlo de una manera segura.
+La respuesta correcta es que no puede. Bueno, al menos no puede hacerlo de una
+manera segura.
 
 Veamos por qué.
 
 ## La generación aleatoria de números a través de `keccak256`
 
-La mejor fuente de aleatoriedad que tenemos en solidity es la función hash `keccak256`.
+La mejor fuente de aleatoriedad que tenemos en solidity es la función hash
+`keccak256`.
 
 Podríamos hacer algo como lo siguiente para generar un número aleatorio:
 
@@ -278,42 +278,90 @@ randNonce++;
 uint random2 = uint(keccak256(now, msg.sender, randNonce)) % 100;
 ```
 
-Lo que esto haría es tomar la marca de tiempo de `now`, el `msg.sender`, y un `nonce` (un número que sólo se utiliza una vez, para que no ejecutemos dos veces la misma función hash con los mismos parámetros de entrada) en incremento.
+Lo que esto haría es tomar la marca de tiempo de `now`, el `msg.sender`, y un
+`nonce` (un número que sólo se utiliza una vez, para que no ejecutemos dos veces
+la misma función hash con los mismos parámetros de entrada) en incremento.
 
-Luego entonces utilizaría `keccak` para convertir estas entradas a un hash aleatorio, convertir ese hash a un `uint` y luego utilizar `% 100` para tomar los últimos 2 dígitos solamente, dándonos un número totalmente aleatorio entre 0 y 99.
+Luego entonces utilizaría `keccak` para convertir estas entradas a un hash
+aleatorio, convertir ese hash a un `uint` y luego utilizar `% 100` para tomar
+los últimos 2 dígitos solamente, dándonos un número totalmente aleatorio entre 0
+y 99.
 
 ### Este método es vulnerable a ataques de nodos deshonestos
 
-En Ethereum, cuando llama a una función en un contrato, lo transmite a un nodo o nodos en la red como una **_transacción_**. Los nodos en la red luego recolectan un montón de transacciones, intentan ser el primero en resolver el problema de matemática intensamente informático como una "Prueba de Trabajo", para luego publicar ese grupo de transacciones junto con sus Pruebas de Trabajo (PoW) como un **_bloque_** para el resto de la red.
+En Ethereum, cuando llama a una función en un contrato, lo transmite a un nodo o
+nodos en la red como una **_transacción_**. Los nodos en la red luego recolectan
+un montón de transacciones, intentan ser el primero en resolver el problema de
+matemática intensamente informático como una "Prueba de Trabajo", para luego
+publicar ese grupo de transacciones junto con sus Pruebas de Trabajo (PoW) como
+un **_bloque_** para el resto de la red.
 
-Una vez que un nodo ha resuelto la PoW, los otros nodos dejan de intentar resolver la PoW, verifican que las transacciones en la lista de transacciones del otro nodo son válidas, luego aceptan el bloque y pasan a tratar de resolver el próximo bloque.
+Una vez que un nodo ha resuelto la PoW, los otros nodos dejan de intentar
+resolver la PoW, verifican que las transacciones en la lista de transacciones
+del otro nodo son válidas, luego aceptan el bloque y pasan a tratar de resolver
+el próximo bloque.
 
 **Esto hace que nuestra función de números aleatorios sea explotable **.
 
-Digamos que teníamos un contrato coin flip — cara y duplica su dinero, sello y pierde todo. Digamos que utilizó la función aleatoria anterior para determinar cara o sello. (`random >= 50` es cara, `random < 50` es sello).
+Digamos que teníamos un contrato coin flip — cara y duplica su dinero, sello y
+pierde todo. Digamos que utilizó la función aleatoria anterior para determinar
+cara o sello. (`random >= 50` es cara, `random < 50` es sello).
 
-Si yo estuviera ejecutando un nodo, podría publicar una transacción **a mi propio nodo solamente** y no compartirla. Luego podría ejecutar la función coin flip para ver si gané — y si perdí, escojo no incluir esa transacción en el próximo bloque que estoy resolviendo. Podría seguir haciendo esto indefinidamente hasta que finalmente gané el lanzamiento de la moneda y resolví el siguiente bloque, beneficiandome de ello.
+Si yo estuviera ejecutando un nodo, podría publicar una transacción **a mi
+propio nodo solamente** y no compartirla. Luego podría ejecutar la función coin
+flip para ver si gané — y si perdí, escojo no incluir esa transacción en el
+próximo bloque que estoy resolviendo. Podría seguir haciendo esto
+indefinidamente hasta que finalmente gané el lanzamiento de la moneda y resolví
+el siguiente bloque, beneficiandome de ello.
 
 ## Entonces ¿Cómo generamos números aleatorio de manera segura en Ethereum?
 
-Ya que todos los contenidos de la blockchain son visibles para todos los participantes, este es un problema dificil, y su solución está más allá del rango de este tutorial. Puede leer <a href="https://ethereum.stackexchange.com/questions/191/how-can-i-securely-generate-a-random-number-in-my-smart-contract" target=_new>este hilo de StackOverflow</a> para que se haga un idea. Una idea sería utilizar un **_oráculo_** para ingresar una función de número aleatorio desde fuera de la blockchain de Ethereum.
+Ya que todos los contenidos de la blockchain son visibles para todos los
+participantes, este es un problema dificil, y su solución está más allá del
+rango de este tutorial. Puede leer
+<a href="https://ethereum.stackexchange.com/questions/191/how-can-i-securely-generate-a-random-number-in-my-smart-contract" target=_new>este
+hilo de StackOverflow</a> para que se haga un idea. Una idea sería utilizar un
+**_oráculo_** para ingresar una función de número aleatorio desde fuera de la
+blockchain de Ethereum.
 
-Por supuesto, debido a que cientos de miles de nodos de Ethereum en la red están compitiendo por resolver el próximo bloque, mis probabilidades de resolver el siguiente bloque son extremadamente escasas. Me tomaría mucho tiempo o recursos informáticos para explotar esto y que sea beneficioso — pero si la recompensa fuera lo suficientemente alta (como si pudiera apostar $100,000,000 en la función coin flip), para mi valdría la pena atacar.
+Por supuesto, debido a que cientos de miles de nodos de Ethereum en la red están
+compitiendo por resolver el próximo bloque, mis probabilidades de resolver el
+siguiente bloque son extremadamente escasas. Me tomaría mucho tiempo o recursos
+informáticos para explotar esto y que sea beneficioso — pero si la recompensa
+fuera lo suficientemente alta (como si pudiera apostar \$100,000,000 en la
+función coin flip), para mi valdría la pena atacar.
 
-Así que mientras esta generación de número aleatorio NO sea segura en Ethereum, en la práctica a menos que nuestra función aleatoria tenga mucho dinero en riesgo, es probable que los usuarios de su juego no tengan suficientes recursos para atacarla. 
+Así que mientras esta generación de número aleatorio NO sea segura en Ethereum,
+en la práctica a menos que nuestra función aleatoria tenga mucho dinero en
+riesgo, es probable que los usuarios de su juego no tengan suficientes recursos
+para atacarla.
 
-Ya que sólo estamos construyendo un juego simple para propósitos de demo en este tutorial y no hay dinero real en riesgo, vamos a asumir el riesgo de utilizar un generador de números aleatorios que es simple de implementar, sabiendo que no es totalmente seguro.
+Ya que sólo estamos construyendo un juego simple para propósitos de demo en este
+tutorial y no hay dinero real en riesgo, vamos a asumir el riesgo de utilizar un
+generador de números aleatorios que es simple de implementar, sabiendo que no es
+totalmente seguro.
 
-En una lección futura, puede que cubramos el uso de los **_oráculos_** (una manera segura de incorporar datos desde afuera de Ethereum) para generar números aleatorios seguros desde afuera de la blockchain.
+En una lección futura, puede que cubramos el uso de los **_oráculos_** (una
+manera segura de incorporar datos desde afuera de Ethereum) para generar números
+aleatorios seguros desde afuera de la blockchain.
 
 ## Pongalo a prueba
 
-Implementemos una función de número aleatorio que podamos utilizar para determinar el resultado de nuestras batallas, incluso si no está totalmente seguro de ataques.
+Implementemos una función de número aleatorio que podamos utilizar para
+determinar el resultado de nuestras batallas, incluso si no está totalmente
+seguro de ataques.
 
-1. Dé a nuestro contrato un `uint` llamado `randNonce`, y configurarlo como igual a `0`.
+1. Dé a nuestro contrato un `uint` llamado `randNonce`, y configurarlo como
+   igual a `0`.
 
-2. Cree una función llamada `randMod` (random-modulus). Será una función `internal` que tome un `uint` llamado `_modulus`, y `returns` un `uint`.
+2. Cree una función llamada `randMod` (random-modulus). Será una función
+   `internal` que tome un `uint` llamado `_modulus`, y `returns` un `uint`.
 
-3. La función debería primero incrementar `randNonce` (utilizando la sintaxis `randNonce++`).
+3. La función debería primero incrementar `randNonce` (utilizando la sintaxis
+   `randNonce++`).
 
-4. Finalmente, debería (en una línea de código) calcular el encasillado de `uint` del hash `keccak256` de `now`, `msg.sender` y `randNonce` — y `return` (arrojar) ese valor `% _modulus`. (¡Vaya! Eso fue un trabalenguas. Si pudo comprender eso, tan sólo eche un vistazo al ejemplo de arriba donde generamos un número aleatorio — la lógica es muy similar).
+4. Finalmente, debería (en una línea de código) calcular el encasillado de
+   `uint` del hash `keccak256` de `now`, `msg.sender` y `randNonce` — y `return`
+   (arrojar) ese valor `% _modulus`. (¡Vaya! Eso fue un trabalenguas. Si pudo
+   comprender eso, tan sólo eche un vistazo al ejemplo de arriba donde generamos
+   un número aleatorio — la lógica es muy similar).

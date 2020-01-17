@@ -1,6 +1,6 @@
 ---
 title: SafeMath partie 3
-actions: ['vérifierLaRéponse', 'indice']
+actions: ["vérifierLaRéponse", "indice"]
 requireLogin: true
 material:
   editor:
@@ -465,7 +465,9 @@ material:
 
 Bien, maintenant notre implémentation ERC721 est protégée des débordements !
 
-Si nous regardons le code que nous avons déjà écrit dans les leçons précédentes, il y a d'autres endroits dans notre code qui pourraient être vulnérables aux débordements.
+Si nous regardons le code que nous avons déjà écrit dans les leçons précédentes,
+il y a d'autres endroits dans notre code qui pourraient être vulnérables aux
+débordements.
 
 Par exemple, dans ZombieAttack nous avons :
 
@@ -475,9 +477,16 @@ myZombie.level++;
 enemyZombie.lossCount++;
 ```
 
-Nous devrions empêcher les débordements ici par précaution. (C'est une bonne idée en général de simplement utiliser SafeMath à la place des opérateurs mathématiques de base. Peut-être que dans une future version de Solidity cela sera implémenté par défaut, mais pour l'instant nous devons prendre des précautions supplémentaires dans notre code.)
+Nous devrions empêcher les débordements ici par précaution. (C'est une bonne
+idée en général de simplement utiliser SafeMath à la place des opérateurs
+mathématiques de base. Peut-être que dans une future version de Solidity cela
+sera implémenté par défaut, mais pour l'instant nous devons prendre des
+précautions supplémentaires dans notre code.)
 
-Dans tous les cas, nous avons un petit problème — `winCount` et `lossCount` sont des `uint16`s, et `level` est un `uint32`. Si nous voulions utiliser la méthode `add` de SafeMath avec ces arguments, cela ne les protégerait pas d'un débordement vu qu'ils seraient converti en `uint256` :
+Dans tous les cas, nous avons un petit problème — `winCount` et `lossCount` sont
+des `uint16`s, et `level` est un `uint32`. Si nous voulions utiliser la méthode
+`add` de SafeMath avec ces arguments, cela ne les protégerait pas d'un
+débordement vu qu'ils seraient converti en `uint256` :
 
 ```
 function add(uint256 a, uint256 b) internal pure returns (uint256) {
@@ -490,11 +499,15 @@ function add(uint256 a, uint256 b) internal pure returns (uint256) {
 // Il ne débordera pas à 2^8, car 256 est un `uint256` valide.
 ```
 
-Cela veut dire que nous allons devoir implémenter 2 bibliothèques de plus pour empêcher les débordements de nos `uint16`s et `uint32`s. Nous pouvons les appeler `SafeMath16` et `SafeMath32`.
+Cela veut dire que nous allons devoir implémenter 2 bibliothèques de plus pour
+empêcher les débordements de nos `uint16`s et `uint32`s. Nous pouvons les
+appeler `SafeMath16` et `SafeMath32`.
 
-Le code sera exactement le même que SafeMath, à l'exception des instances `uint256` qui seront remplacées par `uint32` ou `uint16`.
+Le code sera exactement le même que SafeMath, à l'exception des instances
+`uint256` qui seront remplacées par `uint32` ou `uint16`.
 
-Nous avons pris de l'avance et avons implémenté ce code pour vous — vous pouvez voir le code dans `safemath.sol`.
+Nous avons pris de l'avance et avons implémenté ce code pour vous — vous pouvez
+voir le code dans `safemath.sol`.
 
 Maintenant nous devons l'implémenter dans ZombieFactory.
 
@@ -506,4 +519,5 @@ Mission :
 
 2. Déclarez que nous utilisons `SafeMath16` pour les `uint16`.
 
-3. Il y a une ligne de plus dans ZombieFactory où nous devrions utiliser une méthode SafeMath. Nous avons laissé un commentaire pour indiquer où.
+3. Il y a une ligne de plus dans ZombieFactory où nous devrions utiliser une
+   méthode SafeMath. Nous avons laissé un commentaire pour indiquer où.

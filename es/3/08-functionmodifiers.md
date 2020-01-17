@@ -1,6 +1,6 @@
 ---
 title: Más sobre Modificadores de Funciones
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -210,13 +210,18 @@ material:
 
 ¡Genial! Nuestro zombi tiene ahora un temporizador de enfriamiento.
 
-Ahora, vamos a añadir algunos métodos auxiliares. Hemos creado un nuevo fichero por tí llamado `zombiehelper.sol`, que importa `zombiefeeding.sol`. Esto nos ayudará a tener nuestro código organizado.
+Ahora, vamos a añadir algunos métodos auxiliares. Hemos creado un nuevo fichero
+por tí llamado `zombiehelper.sol`, que importa `zombiefeeding.sol`. Esto nos
+ayudará a tener nuestro código organizado.
 
-Vamos a hacer que nuestros zombis adquieran una habilidad especial después de alcanzar cierto nivel. Pero para hacer esto, primero necesitamos aprender un poco más sobre los modificadores de funciones.
+Vamos a hacer que nuestros zombis adquieran una habilidad especial después de
+alcanzar cierto nivel. Pero para hacer esto, primero necesitamos aprender un
+poco más sobre los modificadores de funciones.
 
 ## Modificadores de funciones con argumentos
 
-Antes hemos visto el ejemplo simple de `onlyOwner`. Pero un modificador de función puede también recibir argumentos. Por ejemplo:
+Antes hemos visto el ejemplo simple de `onlyOwner`. Pero un modificador de
+función puede también recibir argumentos. Por ejemplo:
 
 ```
 // Un mapeo para guardar la edad de un usuario:
@@ -235,14 +240,20 @@ function driveCar(uint _userId) public olderThan(16, _userId) {
 }
 ```
 
-Puedes ver aquí como el modificador `olderThan` recibe los argumentos de la misma manera que las funciones. Y cómo la función `driveCar` le pasa sus argumentos al modificador.
+Puedes ver aquí como el modificador `olderThan` recibe los argumentos de la
+misma manera que las funciones. Y cómo la función `driveCar` le pasa sus
+argumentos al modificador.
 
-Vamos a probar a hacer nuestro propio `modifier` que utilice la propiedad `level` del zombi para restringir el acceso a las habilidades especiales.
+Vamos a probar a hacer nuestro propio `modifier` que utilice la propiedad
+`level` del zombi para restringir el acceso a las habilidades especiales.
 
 ## Vamos a probarlo
 
-1. En `ZombieHelper`, crea un `modifier` llamado `aboveLevel`. Este recibirá 2 argumentos, `_level` (un `uint`) y `_zombieId` (también un `uint`).
+1. En `ZombieHelper`, crea un `modifier` llamado `aboveLevel`. Este recibirá 2
+   argumentos, `_level` (un `uint`) y `_zombieId` (también un `uint`).
 
-2. El cuerpo de la función deberá comprobar que `zombies[_zombieId].level` es mayor o igual a `_level`.
+2. El cuerpo de la función deberá comprobar que `zombies[_zombieId].level` es
+   mayor o igual a `_level`.
 
-3. Recuerda que para que el modificador pueda ser llamado por el resto de funciones debe incluir `_;` en la última línea.
+3. Recuerda que para que el modificador pueda ser llamado por el resto de
+   funciones debe incluir `_;` en la última línea.

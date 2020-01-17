@@ -1,6 +1,6 @@
 ---
 title: Retiros
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -153,81 +153,81 @@ material:
 
         }
       "ownable.sol": |
-       pragma solidity ^0.4.25;
+        pragma solidity ^0.4.25;
 
-        /**
-        * @title Ownable
-        * @dev The Ownable contract has an owner address, and provides basic authorization control
-        * functions, this simplifies the implementation of "user permissions".
-        */
-        contract Ownable {
-          address private _owner;
+         /**
+         * @title Ownable
+         * @dev The Ownable contract has an owner address, and provides basic authorization control
+         * functions, this simplifies the implementation of "user permissions".
+         */
+         contract Ownable {
+           address private _owner;
 
-          event OwnershipTransferred(
-            address indexed previousOwner,
-            address indexed newOwner
-          );
+           event OwnershipTransferred(
+             address indexed previousOwner,
+             address indexed newOwner
+           );
 
-          /**
-          * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-          * account.
-          */
-          constructor() internal {
-            _owner = msg.sender;
-            emit OwnershipTransferred(address(0), _owner);
-          }
+           /**
+           * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+           * account.
+           */
+           constructor() internal {
+             _owner = msg.sender;
+             emit OwnershipTransferred(address(0), _owner);
+           }
 
-          /**
-          * @return the address of the owner.
-          */
-          function owner() public view returns(address) {
-            return _owner;
-          }
+           /**
+           * @return the address of the owner.
+           */
+           function owner() public view returns(address) {
+             return _owner;
+           }
 
-          /**
-          * @dev Throws if called by any account other than the owner.
-          */
-          modifier onlyOwner() {
-            require(isOwner());
-            _;
-          }
+           /**
+           * @dev Throws if called by any account other than the owner.
+           */
+           modifier onlyOwner() {
+             require(isOwner());
+             _;
+           }
 
-          /**
-          * @return true if `msg.sender` is the owner of the contract.
-          */
-          function isOwner() public view returns(bool) {
-            return msg.sender == _owner;
-          }
+           /**
+           * @return true if `msg.sender` is the owner of the contract.
+           */
+           function isOwner() public view returns(bool) {
+             return msg.sender == _owner;
+           }
 
-          /**
-          * @dev Allows the current owner to relinquish control of the contract.
-          * @notice Renouncing to ownership will leave the contract without an owner.
-          * It will not be possible to call the functions with the `onlyOwner`
-          * modifier anymore.
-          */
-          function renounceOwnership() public onlyOwner {
-            emit OwnershipTransferred(_owner, address(0));
-            _owner = address(0);
-          }
+           /**
+           * @dev Allows the current owner to relinquish control of the contract.
+           * @notice Renouncing to ownership will leave the contract without an owner.
+           * It will not be possible to call the functions with the `onlyOwner`
+           * modifier anymore.
+           */
+           function renounceOwnership() public onlyOwner {
+             emit OwnershipTransferred(_owner, address(0));
+             _owner = address(0);
+           }
 
-          /**
-          * @dev Allows the current owner to transfer control of the contract to a newOwner.
-          * @param newOwner The address to transfer ownership to.
-          */
-          function transferOwnership(address newOwner) public onlyOwner {
-            _transferOwnership(newOwner);
-          }
+           /**
+           * @dev Allows the current owner to transfer control of the contract to a newOwner.
+           * @param newOwner The address to transfer ownership to.
+           */
+           function transferOwnership(address newOwner) public onlyOwner {
+             _transferOwnership(newOwner);
+           }
 
-          /**
-          * @dev Transfers control of the contract to a newOwner.
-          * @param newOwner The address to transfer ownership to.
-          */
-          function _transferOwnership(address newOwner) internal {
-            require(newOwner != address(0));
-            emit OwnershipTransferred(_owner, newOwner);
-            _owner = newOwner;
-          }
-        }
+           /**
+           * @dev Transfers control of the contract to a newOwner.
+           * @param newOwner The address to transfer ownership to.
+           */
+           function _transferOwnership(address newOwner) internal {
+             require(newOwner != address(0));
+             emit OwnershipTransferred(_owner, newOwner);
+             _owner = newOwner;
+           }
+         }
     answer: >
       pragma solidity ^0.4.25;
 
@@ -257,17 +257,20 @@ material:
           zombies[_zombieId].level++;
         }
 
-        function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) {
+        function changeName(uint _zombieId, string _newName) external
+      aboveLevel(2, _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].name = _newName;
         }
 
-        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) {
+        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20,
+      _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].dna = _newDna;
         }
 
-        function getZombiesByOwner(address _owner) external view returns(uint[]) {
+        function getZombiesByOwner(address _owner) external view returns(uint[])
+      {
           uint[] memory result = new uint[](ownerZombieCount[_owner]);
           uint counter = 0;
           for (uint i = 0; i < zombies.length; i++) {
@@ -282,11 +285,15 @@ material:
       }
 ---
 
-En el capitulo anterior, aprendimos cómo enviar Ether a un contrato. Entonces ¿Qué ocurre cuando lo envía?
+En el capitulo anterior, aprendimos cómo enviar Ether a un contrato. Entonces
+¿Qué ocurre cuando lo envía?
 
-Luego de enviar Ether a un contrato, este se almacena en la cuenta de Ethereum del contrato y estará atrapado ahí — a menos que añada una función para retirar el Ether del contrato
+Luego de enviar Ether a un contrato, este se almacena en la cuenta de Ethereum
+del contrato y estará atrapado ahí — a menos que añada una función para retirar
+el Ether del contrato
 
-Puede escribir una función para retirar Ether del contrato de la siguiente forma:
+Puede escribir una función para retirar Ether del contrato de la siguiente
+forma:
 
 ```
 contract GetPaid is Ownable {
@@ -296,29 +303,45 @@ contract GetPaid is Ownable {
 }
 ```
 
-Nótese que estamos utilizando `owner` y `onlyOwner` del contrato `Ownable`, asumiendo que este fue importado.
+Nótese que estamos utilizando `owner` y `onlyOwner` del contrato `Ownable`,
+asumiendo que este fue importado.
 
-Puede transferir Ether a una dirección utilizando la función `transfer` y `this.balance` devolverá el balance total almacenado en el contrato. Así que si 100 usuarios han pagado 1 Ether a nuestro contrato, `this.balance` sería igual a 100 Ether.
+Puede transferir Ether a una dirección utilizando la función `transfer` y
+`this.balance` devolverá el balance total almacenado en el contrato. Así que si
+100 usuarios han pagado 1 Ether a nuestro contrato, `this.balance` sería igual a
+100 Ether.
 
-Puede utilizar `transfer` para enviar fondos a cualquier dirección de Ethereum. Por ejemplo, podría tener una función que transfiera Ether de vuelta al `msg.sender` si rebasan el precio al pagar un item.
+Puede utilizar `transfer` para enviar fondos a cualquier dirección de Ethereum.
+Por ejemplo, podría tener una función que transfiera Ether de vuelta al
+`msg.sender` si rebasan el precio al pagar un item.
 
 ```
 uint itemFee = 0.001 ether;
 msg.sender.transfer(msg.value - itemFee);
 ```
 
-O en un contrato con un comprador y un vendedor, usted podría guardar la dirección del vendedor en la memoria, luego, cuando alguien adquiera su item, transferirle la tasa pagada por el comprador: `seller.transfer(msg.value)`.
+O en un contrato con un comprador y un vendedor, usted podría guardar la
+dirección del vendedor en la memoria, luego, cuando alguien adquiera su item,
+transferirle la tasa pagada por el comprador: `seller.transfer(msg.value)`.
 
-Estos son algunos ejemplos de lo que hace de la programación de Ethereum algo realmente genial — puede tener mercados descentralizados como este que no son controlados por nadie.
+Estos son algunos ejemplos de lo que hace de la programación de Ethereum algo
+realmente genial — puede tener mercados descentralizados como este que no son
+controlados por nadie.
 
-## Pongalo a prueba 
+## Pongalo a prueba
 
-1. Cree una función `withdraw` en nuestro contrato, la cual debería ser idéntica al ejemplo `GetPaid` anterior.
+1. Cree una función `withdraw` en nuestro contrato, la cual debería ser idéntica
+   al ejemplo `GetPaid` anterior.
 
-2. El precio del Ether aumentó x10 en el año pasado. Así que mientras 0.001 ether es como $1 en el momento de escribir esto, si sube x10 de nuevo, 0.001 ETH sería equivalente a $10 y nuestro juego será mucho más costoso.
+2. El precio del Ether aumentó x10 en el año pasado. Así que mientras 0.001
+   ether es como
+   $1 en el momento de escribir esto, si sube x10 de nuevo, 0.001 ETH sería equivalente a $10
+   y nuestro juego será mucho más costoso.
 
-  Así que es una buena idea crear una función que nos permita, como dueños del contrato, configurar el `levelUpFee`.
+Así que es una buena idea crear una función que nos permita, como dueños del
+contrato, configurar el `levelUpFee`.
 
-  a. Cree una función llamada `setLevelUpFee` que tome un argumento, `uint _fee`, sea `external` y utilice el modificador `onlyOwner`.
+a. Cree una función llamada `setLevelUpFee` que tome un argumento, `uint _fee`,
+sea `external` y utilice el modificador `onlyOwner`.
 
-  b. La función debería configurar `levelUpFee` como igual a `_fee`.
+b. La función debería configurar `levelUpFee` como igual a `_fee`.

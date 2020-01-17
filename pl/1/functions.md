@@ -1,6 +1,6 @@
 ---
 title: Deklaracja Funkcji
-actions: ['sprawdźOdpowiedź', 'podpowiedzi']
+actions: ["sprawdźOdpowiedź", "podpowiedzi"]
 material:
   editor:
     language: sol
@@ -53,9 +53,12 @@ function eatHamburgers(string _name, uint _amount) {
 }
 ```
 
-Funkcja `eatHamburgers` przyjmuje 2 parametry:  `string` oraz `uint`. Aktualnie zawartość funkcji jest pusta.
+Funkcja `eatHamburgers` przyjmuje 2 parametry: `string` oraz `uint`. Aktualnie
+zawartość funkcji jest pusta.
 
-> Notatka: Konwensja jest taka, (nie jest to wymagane) aby parametry funkcji zaczynać podkreślnikiem (`_`) aby odróżnić je od zmiennych globalnych. Będziemy używać tej konwencji w trakcie tutorialu.
+> Notatka: Konwensja jest taka, (nie jest to wymagane) aby parametry funkcji
+> zaczynać podkreślnikiem (`_`) aby odróżnić je od zmiennych globalnych.
+> Będziemy używać tej konwencji w trakcie tutorialu.
 
 Możesz wywołać tą funkcję następująco:
 
@@ -65,8 +68,10 @@ eatHamburgers("vitalik", 100);
 
 # Zadanie do wykonania
 
-Potrzebujemy mieć możliwość tworzenia zombich w naszej aplikacji. Stwórzmy funkcję, która będzie za to odpowiadać.
+Potrzebujemy mieć możliwość tworzenia zombich w naszej aplikacji. Stwórzmy
+funkcję, która będzie za to odpowiadać.
 
-1. Stwórz funkcję o nazwie `createZombie`. Powinna przyjmować dwa parametry: **\_name** (`string`), oraz **\_dna** (`uint`).
+1. Stwórz funkcję o nazwie `createZombie`. Powinna przyjmować dwa parametry:
+   **\_name** (`string`), oraz **\_dna** (`uint`).
 
 Narazie pozostaw funkcję pustą — wypełnimy ją później.

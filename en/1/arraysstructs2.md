@@ -1,6 +1,6 @@
 ---
 title: Working With Structs and Arrays
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -60,7 +60,8 @@ struct Person {
 Person[] public people;
 ```
 
-Now we're going to learn how to create new `Person`s and add them to our `people` array.
+Now we're going to learn how to create new `Person`s and add them to our
+`people` array.
 
 ```
 // create a New Person:
@@ -70,13 +71,15 @@ Person satoshi = Person(172, "Satoshi");
 people.push(satoshi);
 ```
 
-We can also combine these together and do them in one line of code to keep things clean:
+We can also combine these together and do them in one line of code to keep
+things clean:
 
 ```
 people.push(Person(16, "Vitalik"));
 ```
 
-Note that `array.push()` adds something to the **end** of the array, so the elements are in the order we added them. See the following example:
+Note that `array.push()` adds something to the **end** of the array, so the
+elements are in the order we added them. See the following example:
 
 ```
 uint[] numbers;
@@ -90,5 +93,7 @@ numbers.push(15);
 
 Let's make our createZombie function do something!
 
-1. Fill in the function body so it creates a new `Zombie`, and adds it to the `zombies` array. The `name` and `dna` for the new Zombie should come from the function arguments.
+1. Fill in the function body so it creates a new `Zombie`, and adds it to the
+   `zombies` array. The `name` and `dna` for the new Zombie should come from the
+   function arguments.
 2. Let's do it in one line of code to keep things clean.

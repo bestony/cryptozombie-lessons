@@ -1,8 +1,8 @@
 ---
 title: Wrapping It Up
 actions:
-  - 'checkAnswer'
-  - 'hints'
+  - "checkAnswer"
+  - "hints"
 requireLogin: true
 material:
   saveZombie: true
@@ -12,6 +12,7 @@ material:
     hideSliders: true
     answer: 1
 ---
+
 Congratulations! That concludes Lesson 4.
 
 Go ahead and test out your battle function to the right!
@@ -26,4 +27,5 @@ After winning the battle:
 
 3. You will spawn a new zombie to add to your army!
 
-Go ahead and try the battle, then proceed to the next chapter to complete the lesson.
+Go ahead and try the battle, then proceed to the next chapter to complete the
+lesson.

@@ -1,6 +1,6 @@
 ---
 title: Withdraw関数
-actions: ['答え合わせ', 'ヒント']
+actions: ["答え合わせ", "ヒント"]
 requireLogin: true
 material:
   editor:
@@ -219,17 +219,20 @@ material:
           zombies[_zombieId].level++;
         }
 
-        function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) {
+        function changeName(uint _zombieId, string _newName) external
+      aboveLevel(2, _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].name = _newName;
         }
 
-        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) {
+        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20,
+      _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].dna = _newDna;
         }
 
-        function getZombiesByOwner(address _owner) external view returns(uint[]) {
+        function getZombiesByOwner(address _owner) external view returns(uint[])
+      {
           uint[] memory result = new uint[](ownerZombieCount[_owner]);
           uint counter = 0;
           for (uint i = 0; i < zombies.length; i++) {
@@ -244,11 +247,14 @@ material:
       }
 ---
 
-前のチャプターで、Etherをコントラクトにどうやって送るかを学んだ。では送ったあとに何が起こるのか？
+前のチャプターで、Ether をコントラクトにどうやって送るかを学んだ。では送ったあと
+に何が起こるのか？
 
-コントラクトに送られたEthは、コントラクトのイーサリアム・アカウントに貯められる。コントラクトからEtherを引き出す関数を追加しない限りはそこに閉じ込められたままになってしまうのだ。 
+コントラクトに送られた Eth は、コントラクトのイーサリアム・アカウントに貯められ
+る。コントラクトから Ether を引き出す関数を追加しない限りはそこに閉じ込められた
+ままになってしまうのだ。
 
-Etherをコントラクトから引き出す関数は、次のように書くぞ。
+Ether をコントラクトから引き出す関数は、次のように書くぞ。
 
 ```
 contract GetPaid is Ownable {
@@ -258,29 +264,43 @@ contract GetPaid is Ownable {
 }
 ```
 
-インポートされていることを想定して、`owner`と`onlyOwner`修飾子を`Ownable`コントラクトから用いていることに注目してくれ。
+インポートされていることを想定して、`owner`と`onlyOwner`修飾子を`Ownable`コント
+ラクトから用いていることに注目してくれ。
 
-`transfer`関数を使ってEtherをあるアドレスに送ることができ、`this.balance`はコントラクトに溜まっている残高の総量を返す。なのでもし100人のユーザーが１Etherを我々のコントラクトに支払ったとしたら、`this.balance`は100Etherに等しくなるはずだ。
+`transfer`関数を使って Ether をあるアドレスに送ることができ、`this.balance`はコ
+ントラクトに溜まっている残高の総量を返す。なのでもし 100 人のユーザーが１ Ether
+を我々のコントラクトに支払ったとしたら、`this.balance`は 100Ether に等しくなるは
+ずだ。
 
-`transfer`を使えば、どんなイーサリアムのアドレスにも送金可能だ。例えば下にあるように、あるアイテムに対する支払いが多すぎた場合に、Etherを`msg.sender`に送り返す関数を作ることだってできるのだ。
+`transfer`を使えば、どんなイーサリアムのアドレスにも送金可能だ。例えば下にあるよ
+うに、あるアイテムに対する支払いが多すぎた場合に、Ether を`msg.sender`に送り返す
+関数を作ることだってできるのだ。
 
 ```
 uint itemFee = 0.001 ether;
 msg.sender.transfer(msg.value - itemFee);
 ```
 
-または購入者と販売者間のコントラクトにおいて、販売者のアドレスをストレージに保存しておいて、誰かが販売者のアイテムを購入する際に、購入者が支払った料金を販売者に送金することも可能となる。やり方はこうだ。`seller.transfer(msg.value)`
+または購入者と販売者間のコントラクトにおいて、販売者のアドレスをストレージに保存
+しておいて、誰かが販売者のアイテムを購入する際に、購入者が支払った料金を販売者に
+送金することも可能となる。やり方はこうだ。`seller.transfer(msg.value)`
 
-これらは、イーサリアムのプログラミングを本当にクールにしている一例だ。こんな感じで、誰にもコントロールされない分散型マーケットプレイスが持てるんだからな。
+これらは、イーサリアムのプログラミングを本当にクールにしている一例だ。こんな感じ
+で、誰にもコントロールされない分散型マーケットプレイスが持てるんだからな。
 
 ## さあテストだ
 
-1. 我々のコントラクト内に、上記の`GetPaid`の例と同一の`withdraw`の関数を作成せよ。
+1. 我々のコントラクト内に、上記の`GetPaid`の例と同一の`withdraw`の関数を作成せよ
+   。
 
-2. Etherの価格は昨年で１０倍以上上昇した。この問題作成時0.001 ETHはおよそ1＄だが、もしまたEtherが１０倍の価格になったとしたら、0.001 ETHは10＄になり我々のゲームはかなり高価になる。
+2. Ether の価格は昨年で１０倍以上上昇した。この問題作成時 0.001 ETH はおよそ 1
+   ＄だが、もしまた Ether が１０倍の価格になったとしたら、0.001 ETH は 10 ＄にな
+   り我々のゲームはかなり高価になる。
 
-  そこで一ついいアイディアがある。コントラクトの所有者として、我々が`levelUpFee`を設定できるような関数を作成するのだ。
+そこで一ついいアイディアがある。コントラクトの所有者として、我々が`levelUpFee`を
+設定できるような関数を作成するのだ。
 
-  a. 一つの引数`uint _fee`を受け取る`setLevelUpFee`という名の関数を作成せよ。これは`external`であり、`onlyOwner`修飾子を用いることとする。
+a. 一つの引数`uint _fee`を受け取る`setLevelUpFee`という名の関数を作成せよ。これ
+は`external`であり、`onlyOwner`修飾子を用いることとする。
 
-  b. 作成した関数に`levelUpFee`を設定し、`_fee`と同等となるようにせよ。
+b. 作成した関数に`levelUpFee`を設定し、`_fee`と同等となるようにせよ。

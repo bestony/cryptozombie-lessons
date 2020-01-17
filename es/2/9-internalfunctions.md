@@ -1,6 +1,6 @@
 ---
 title: Más en la Visibilidad de Funciones
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -106,17 +106,27 @@ material:
 
 Si intentas compilarlo, el compilador lanzará un error.
 
-El problema es que hemos intentado llamar a la función `_createZombie` desde `ZombieFeeding`, pero `_createZombie` es una función `private` dentro de `ZombieFactory`. Eso significa que ninguno de los demás contratos que hereden de `ZombieFactory` podrán acceder a ello.
+El problema es que hemos intentado llamar a la función `_createZombie` desde
+`ZombieFeeding`, pero `_createZombie` es una función `private` dentro de
+`ZombieFactory`. Eso significa que ninguno de los demás contratos que hereden de
+`ZombieFactory` podrán acceder a ello.
 
 ## Internal y External
 
-Además de `public` y `private`, Solidity tiene dos tipos de visibilidad más para las funciones: `internal` y `external`.
+Además de `public` y `private`, Solidity tiene dos tipos de visibilidad más para
+las funciones: `internal` y `external`.
 
-`internal` es lo mismo que `private`, a excepción de que es también accesible desde otros contratos que hereden de este. **(¡Ey, suena como lo que necesitamos aquí!)**.
+`internal` es lo mismo que `private`, a excepción de que es también accesible
+desde otros contratos que hereden de este. **(¡Ey, suena como lo que necesitamos
+aquí!)**.
 
-`external` es parecido a `public`, a excepción que estas funciones SOLO puedes ser llamadas desde fuera del contrato — no pueden ser llamadas por otras funciones dentro de ese contrato. Hablaremos más adelante sobre cuando querrás usar `external` vs `public`.
+`external` es parecido a `public`, a excepción que estas funciones SOLO puedes
+ser llamadas desde fuera del contrato — no pueden ser llamadas por otras
+funciones dentro de ese contrato. Hablaremos más adelante sobre cuando querrás
+usar `external` vs `public`.
 
-Para declarar las funciones `internal` o `external`, la sintaxis es igual que `private` y `public`:
+Para declarar las funciones `internal` o `external`, la sintaxis es igual que
+`private` y `public`:
 
 ```
 contract Sandwich {
@@ -140,6 +150,7 @@ contract BLT is Sandwich {
 
 # Vamos a probarlo
 
-1. Cambia `_createZombie()` de `private` a `internal` así otros contratos podrán acceder a ella.
+1. Cambia `_createZombie()` de `private` a `internal` así otros contratos podrán
+   acceder a ella.
 
-  Hemos vuelto a colocarte en la pestaña correspondiente, `zombiefactory.sol`.
+Hemos vuelto a colocarte en la pestaña correspondiente, `zombiefactory.sol`.

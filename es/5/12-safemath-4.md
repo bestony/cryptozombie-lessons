@@ -1,6 +1,6 @@
 ---
 title: SafeMath Part 4
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -471,10 +471,16 @@ material:
         }
 ---
 
-¡Genial!¡Ahora podemos implementar SafeMath en todos los tipos de `uint` que usamos en nuestra DApp!
+¡Genial!¡Ahora podemos implementar SafeMath en todos los tipos de `uint` que
+usamos en nuestra DApp!
 
-Arreglemos todos esos problemas potenciales en `ZombieAttack`. (También había un `zombies[_zombieId].level++;` que necesitaba ser arreglado en `ZombieHelper`, pero nosotros nos ocupamos de eso ya, así no gastamos un capítulo adicional para hacerlo 😉).
+Arreglemos todos esos problemas potenciales en `ZombieAttack`. (También había un
+`zombies[_zombieId].level++;` que necesitaba ser arreglado en `ZombieHelper`,
+pero nosotros nos ocupamos de eso ya, así no gastamos un capítulo adicional para
+hacerlo 😉).
 
 ## Póngalo a prueba
 
-Continúa e implementa los métodos de SafeMath en todos los incrementales `++` que aparecen en `ZombieAttack`. Hemos dejado comentarios en el código para que sean fáciles de encontrar.
+Continúa e implementa los métodos de SafeMath en todos los incrementales `++`
+que aparecen en `ZombieAttack`. Hemos dejado comentarios en el código para que
+sean fáciles de encontrar.

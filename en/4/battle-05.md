@@ -1,6 +1,6 @@
 ---
 title: More Refactoring
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -284,15 +284,18 @@ material:
           zombies[_zombieId].level++;
         }
 
-        function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) ownerOf(_zombieId) {
+        function changeName(uint _zombieId, string _newName) external
+      aboveLevel(2, _zombieId) ownerOf(_zombieId) {
           zombies[_zombieId].name = _newName;
         }
 
-        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) ownerOf(_zombieId) {
+        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20,
+      _zombieId) ownerOf(_zombieId) {
           zombies[_zombieId].dna = _newDna;
         }
 
-        function getZombiesByOwner(address _owner) external view returns(uint[]) {
+        function getZombiesByOwner(address _owner) external view returns(uint[])
+      {
           uint[] memory result = new uint[](ownerZombieCount[_owner]);
           uint counter = 0;
           for (uint i = 0; i < zombies.length; i++) {
@@ -307,7 +310,8 @@ material:
       }
 ---
 
-We have a couple more places in `zombiehelper.sol` where we need to implement our new `modifier` `ownerOf`.
+We have a couple more places in `zombiehelper.sol` where we need to implement
+our new `modifier` `ownerOf`.
 
 ## Put it to the test
 

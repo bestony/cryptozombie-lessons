@@ -1,6 +1,6 @@
 ---
 title: Payable関数
-actions: ['答え合わせ', 'ヒント']
+actions: ["答え合わせ", "ヒント"]
 requireLogin: true
 material:
   editor:
@@ -204,17 +204,20 @@ material:
           zombies[_zombieId].level++;
         }
 
-        function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) {
+        function changeName(uint _zombieId, string _newName) external
+      aboveLevel(2, _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].name = _newName;
         }
 
-        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) {
+        function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20,
+      _zombieId) {
           require(msg.sender == zombieToOwner[_zombieId]);
           zombies[_zombieId].dna = _newDna;
         }
 
-        function getZombiesByOwner(address _owner) external view returns(uint[]) {
+        function getZombiesByOwner(address _owner) external view returns(uint[])
+      {
           uint[] memory result = new uint[](ownerZombieCount[_owner]);
           uint counter = 0;
           for (uint i = 0; i < zombies.length; i++) {
@@ -229,13 +232,26 @@ material:
       }
 ---
 
-これまで我々は **_関数修飾子_** をかなりたくさん扱ってきた。だが全部覚えるのは難しいかもしれないから、素早く復習していくぞ。
+これまで我々は **_関数修飾子_** をかなりたくさん扱ってきた。だが全部覚えるのは難
+しいかもしれないから、素早く復習していくぞ。
 
-1. いつどこで関数を呼び出すかをコントロールする可視性修飾子というものがある。`private`修飾子はコントラクト内の別の関数からのみ呼び出されるという意味だ。`internal`修飾子は`private`修飾子に似ているが、そのコントラクトを継承したコントラクトからも呼び出す事ができる。`external`修飾子はコントラクト外からだけ呼び出す事ができて、最後に`public`修飾子だが、これはコントラクト内部・外部どちらからでも呼び出せるぞ。
+1. いつどこで関数を呼び出すかをコントロールする可視性修飾子というものがある
+   。`private`修飾子はコントラクト内の別の関数からのみ呼び出されるという意味だ
+   。`internal`修飾子は`private`修飾子に似ているが、そのコントラクトを継承したコ
+   ントラクトからも呼び出す事ができる。`external`修飾子はコントラクト外からだけ
+   呼び出す事ができて、最後に`public`修飾子だが、これはコントラクト内部・外部ど
+   ちらからでも呼び出せるぞ。
 
-2. 状態修飾子といって、関数がブロックチェーンとどのように作用し合うのか示してくれるものもある。`view`修飾子は関数が動作しても、なんのデータも保存または変更されないということだ。`pure`修飾子は、関数がブロックチェーンにデータを保存しないだけでなく、ブロックチェーンからデータを読み込むこともないと表しているぞ。どちらも、コントラクト外部から呼び出された場合はガスは必要ない。（ただし、コントラクト内にある別の関数から呼び出されるとガスが必要となるからな。）
+2. 状態修飾子といって、関数がブロックチェーンとどのように作用し合うのか示してく
+   れるものもある。`view`修飾子は関数が動作しても、なんのデータも保存または変更
+   されないということだ。`pure`修飾子は、関数がブロックチェーンにデータを保存し
+   ないだけでなく、ブロックチェーンからデータを読み込むこともないと表しているぞ
+   。どちらも、コントラクト外部から呼び出された場合はガスは必要ない。（ただし、
+   コントラクト内にある別の関数から呼び出されるとガスが必要となるからな。）
 
-3. それからカスタムの`modifier`、例えばレッスン３で学んだ`onlyOwner` や `aboveLevel`というものがある。我々は、これら修飾子の関数への影響の仕方を決定するための、カスタムした理論を定義することが可能だ。
+3. それからカスタムの`modifier`、例えばレッスン３で学んだ`onlyOwner` や
+   `aboveLevel`というものがある。我々は、これら修飾子の関数への影響の仕方を決定
+   するための、カスタムした理論を定義することが可能だ。
 
 これらの修飾子は、全て以下のように一つの関数定義に組み込むことができる。
 
@@ -243,19 +259,27 @@ material:
 function test() external view onlyOwner anotherModifier { /* ... */ }
 ```
 
-このチャプターでは、さらにもう一つ`payable`という関数修飾子を紹介して行くからな。
+このチャプターでは、さらにもう一つ`payable`という関数修飾子を紹介して行くからな
+。
 
 ## `payable`修飾子
 
-`payable`関数は、solidityとEthereumをこんなにもクールにしているものの１つといえる。Etherを受け取ることができる特別なタイプの関数なんだ。 
+`payable`関数は、solidity と Ethereum をこんなにもクールにしているものの１つとい
+える。Ether を受け取ることができる特別なタイプの関数なんだ。
 
-ちょっとじっくりと考えてみよう。お主達が通常のウェブサーバー上でAPI関数を呼び出すとき、ファンクション・コール(関数呼び出し)に併せてUSドルを送ることはできない。ビットコインでもダメだ。
+ちょっとじっくりと考えてみよう。お主達が通常のウェブサーバー上で API 関数を呼び
+出すとき、ファンクション・コール(関数呼び出し)に併せて US ドルを送ることはできな
+い。ビットコインでもダメだ。
 
-だがイーサリアムでは、お金(Ether)もデータ(トランザクションの内容)も、コントラクト・コード自体も全てイーサリアム上にあるから、ファンクション・コール**及び**お金の支払いが同時に可能だ。
+だがイーサリアムでは、お金(Ether)もデータ(トランザクションの内容)も、コントラク
+ト・コード自体も全てイーサリアム上にあるから、ファンクション・コール**及び**お金
+の支払いが同時に可能だ。
 
-関数を実行するため、コントラクトへいくらかの支払いを要求するというようなすごく面白いこともできてしまうのだ。
+関数を実行するため、コントラクトへいくらかの支払いを要求するというようなすごく面
+白いこともできてしまうのだ。
 
 ## 例を見てみよう
+
 ```
 contract OnlineStore {
   function buySomething() external payable {
@@ -267,30 +291,42 @@ contract OnlineStore {
 }
 ```
 
-ここの`msg.value`は、コントラクトにどのくらいEtherが送られたかを見るやり方で、`ether`は組み込み単位だ。
+ここの`msg.value`は、コントラクトにどのくらい Ether が送られたかを見るやり方で
+、`ether`は組み込み単位だ。
 
-ではここでweb3.js（DAppのJavaScriptフロントエンドだ）から以下のように関数を呼び出した場合何が起こるだろうか。
+ではここで web3.js（DApp の JavaScript フロントエンドだ）から以下のように関数を
+呼び出した場合何が起こるだろうか。
 
 ```
 // Assuming `OnlineStore` points to your contract on Ethereum:
 OnlineStore.buySomething({from: web3.eth.defaultAccount, value: web3.utils.toWei(0.001)})
 ```
 
-`value`の部分を見て欲しい。ここではJavaScriptのファンクション・コールで`ether`をどのくらい送るかを定めている(0.001etherだ）。もしトランザクションを封筒のようなものと考えると、ファンクション・コールに渡すパラメーターは、封筒の中に入れた手紙の内容だ。そして`value`を追加するのは、封筒の中に現金を入れるようなものだ。受取人に手紙とお金が一緒に届けられるからな。
+`value`の部分を見て欲しい。ここでは JavaScript のファンクション・コール
+で`ether`をどのくらい送るかを定めている(0.001ether だ）。もしトランザクションを
+封筒のようなものと考えると、ファンクション・コールに渡すパラメーターは、封筒の中
+に入れた手紙の内容だ。そして`value`を追加するのは、封筒の中に現金を入れるような
+ものだ。受取人に手紙とお金が一緒に届けられるからな。
 
->注：関数にpayable修飾子がなく、Etherを上記のように送ろうとする場合、その関数はトランザクションを拒否します。
-
+> 注：関数に payable 修飾子がなく、Ether を上記のように送ろうとする場合、その関
+> 数はトランザクションを拒否します。
 
 ## それではテストだ
 
 我々のゾンビゲームで`payable`関数を作ってみよう。
 
-例えばこのゲームで、ユーザーがETHを支払って自分のゾンビをレベルアップできる機能があるとしよう。そのETHはお主が所有するコントラクト内に溜まっていくから、ゲームでお金を稼げる一番簡単な例だ！
+例えばこのゲームで、ユーザーが ETH を支払って自分のゾンビをレベルアップできる機
+能があるとしよう。その ETH はお主が所有するコントラクト内に溜まっていくから、ゲ
+ームでお金を稼げる一番簡単な例だ！
 
-1. `levelUpFee`という名前の`uint`を定義し、それが`0.001 ether`と同様になるよう設定せよ。
+1. `levelUpFee`という名前の`uint`を定義し、それが`0.001 ether`と同様になるよう設
+   定せよ。
 
-2. `levelUp`という名前の関数を作成せよ。これに一つのパラメーター`_zombieId`（`uint`）を渡せ。また`external`かつ`payable`とせよ。
+2. `levelUp`という名前の関数を作成せよ。これに一つのパラメータ
+   ー`_zombieId`（`uint`）を渡せ。また`external`かつ`payable`とせよ。
 
-3. 最初に`msg.value`が`levelUpFee`と同等であることを、この関数が要求（`require`）するようにせよ。
+3. 最初に`msg.value`が`levelUpFee`と同等であることを、この関数が要求
+   （`require`）するようにせよ。
 
-4. そしたらゾンビの`level`を増やすのだ。やり方はこうだ。 `zombies[_zombieId].level++`
+4. そしたらゾンビの`level`を増やすのだ。やり方はこうだ。
+   `zombies[_zombieId].level++`

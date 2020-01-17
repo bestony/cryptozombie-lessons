@@ -1,6 +1,6 @@
 ---
 title: Victorias y Derrotas Zombie
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -279,7 +279,8 @@ material:
           mapping (address => uint) ownerZombieCount;
 
           function _createZombie(string _name, uint _dna) internal {
-              uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
+              uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now +
+      cooldownTime), 0, 0)) - 1;
               zombieToOwner[id] = msg.sender;
               ownerZombieCount[msg.sender]++;
               emit NewZombie(id, _name, _dna);
@@ -300,24 +301,38 @@ material:
       }
 ---
 
-Para nuestro juego zombie querremos contabilizar cuantas batallas han ganado o perdido nuestros zombies. De esta manera podemos mantener un "tabla de posiciones zombie" en nuestro estado de juego.
+Para nuestro juego zombie querremos contabilizar cuantas batallas han ganado o
+perdido nuestros zombies. De esta manera podemos mantener un "tabla de
+posiciones zombie" en nuestro estado de juego.
 
-Podríamos almacenar estos datos de diferentes maneras en nuestro DApp — como mapeos individuales, como Estructuras de la tabla de posiciones o en la misma estructura `Zombie`.
+Podríamos almacenar estos datos de diferentes maneras en nuestro DApp — como
+mapeos individuales, como Estructuras de la tabla de posiciones o en la misma
+estructura `Zombie`.
 
-Cada uno tiene sus propios beneficios y riesgos dependiendo en cómo planeamos interactuar con los datos. En este tutorial vamos a almacenar las estadísticas en nuestra estructura `Zombie` para mayor sencillez y las llamaremos `winCount` y `lossCount`.
+Cada uno tiene sus propios beneficios y riesgos dependiendo en cómo planeamos
+interactuar con los datos. En este tutorial vamos a almacenar las estadísticas
+en nuestra estructura `Zombie` para mayor sencillez y las llamaremos `winCount`
+y `lossCount`.
 
-Así que regresemos a `zombiefactory.sol` y añadamos estas propiedades a nuestra estructura `Zombie`.
+Así que regresemos a `zombiefactory.sol` y añadamos estas propiedades a nuestra
+estructura `Zombie`.
 
 ## Póngalo a prueba
 
 1. Modifique nuestra estructura `Zombie` para que tenga 2 propiedades más:
 
-  a. `winCount`, un `uint16`
+a. `winCount`, un `uint16`
 
-  b. `lossCount`, también es un `uint16`
+b. `lossCount`, también es un `uint16`
 
-  >Nota: Recuerde, ya que podemos insertar `uint`s dentro de las estructuras, querremos utilizar los `uint`s más pequeños que podamos. Un `uint8` es muy pequeño, dado que 2^8 = 256 — si nuestros zombies son atacados una vez al día, podrían rebasar esto en un año. Pero 2^16 es 65536 — así que, a menos que un usuario gane o pierda todos los días por 179 años seguidos, estamos seguros.
+> Nota: Recuerde, ya que podemos insertar `uint`s dentro de las estructuras,
+> querremos utilizar los `uint`s más pequeños que podamos. Un `uint8` es muy
+> pequeño, dado que 2^8 = 256 — si nuestros zombies son atacados una vez al día,
+> podrían rebasar esto en un año. Pero 2^16 es 65536 — así que, a menos que un
+> usuario gane o pierda todos los días por 179 años seguidos, estamos seguros.
 
-2. Ahora que tenemos nuevas propiedades en nuestra estructura `Zombie`, necesitamos cambiar nuestra definición de función en `_createZombie()`.
+2. Ahora que tenemos nuevas propiedades en nuestra estructura `Zombie`,
+   necesitamos cambiar nuestra definición de función en `_createZombie()`.
 
-  Cambie la definición de creación de zombie para generar cada zombie nuevo con `0` victorias y `0` derrotas.
+Cambie la definición de creación de zombie para generar cada zombie nuevo con
+`0` victorias y `0` derrotas.

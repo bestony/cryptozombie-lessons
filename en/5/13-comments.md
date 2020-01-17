@@ -1,6 +1,6 @@
 ---
 title: Comments
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -483,21 +483,26 @@ material:
 
 The Solidity code for our zombie game is finally finished!
 
-In the next lessons, we'll look at how to deploy the code to Ethereum, and how to interact with it with Web3.js.
+In the next lessons, we'll look at how to deploy the code to Ethereum, and how
+to interact with it with Web3.js.
 
-But one final thing before we let you go in Lesson 5: Let's talk about **commenting your code**.
+But one final thing before we let you go in Lesson 5: Let's talk about
+**commenting your code**.
 
 ## Syntax for comments
 
-Commenting in Solidity is just like JavaScript. You've already seen some examples of single line comments throughout the CryptoZombies lessons:
+Commenting in Solidity is just like JavaScript. You've already seen some
+examples of single line comments throughout the CryptoZombies lessons:
 
 ```
 // This is a single-line comment. It's kind of like a note to self (or to others)
 ```
 
-Just add double `//` anywhere and you're commenting. It's so easy that you should do it all the time.
+Just add double `//` anywhere and you're commenting. It's so easy that you
+should do it all the time.
 
-But I hear you — sometimes a single line is not enough. You are born a writer, after all!
+But I hear you — sometimes a single line is not enough. You are born a writer,
+after all!
 
 Thus we also have multi-line comments:
 
@@ -521,9 +526,13 @@ contract CryptoZombies {
 }
 ```
 
-In particular, it's good practice to comment your code to explain the expected behavior of every function in your contract. This way another developer (or you, after a 6 month hiatus from a project!) can quickly skim and understand at a high level what your code does without having to read the code itself.
+In particular, it's good practice to comment your code to explain the expected
+behavior of every function in your contract. This way another developer (or you,
+after a 6 month hiatus from a project!) can quickly skim and understand at a
+high level what your code does without having to read the code itself.
 
-The standard in the Solidity community is to use a format called **_natspec_**, which looks like this:
+The standard in the Solidity community is to use a format called **_natspec_**,
+which looks like this:
 
 ```
 /// @title A contract for basic math operations
@@ -544,17 +553,24 @@ contract Math {
 
 `@title` and `@author` are straightforward.
 
-`@notice` explains to a **user** what the contract / function does. `@dev` is for explaining extra details to developers.
+`@notice` explains to a **user** what the contract / function does. `@dev` is
+for explaining extra details to developers.
 
-`@param` and `@return` are for describing what each parameter and return value of a function are for.
+`@param` and `@return` are for describing what each parameter and return value
+of a function are for.
 
-Note that you don't always have to use all of these tags for every function — all tags are optional. But at the very least, leave a `@dev` note explaining what each function does.
+Note that you don't always have to use all of these tags for every function
+— all tags are optional. But at the very least, leave a `@dev` note explaining
+what each function does.
 
 # Put it to the test
 
-If you haven't noticed by now, the CryptoZombies answer-checker ignores comments when it checks your answers. So we can't actually check your natspec code for this chapter ;)
+If you haven't noticed by now, the CryptoZombies answer-checker ignores comments
+when it checks your answers. So we can't actually check your natspec code for
+this chapter ;)
 
-However, by now you're a Solidity whiz — we're just going to assume you've got this!
+However, by now you're a Solidity whiz — we're just going to assume you've got
+this!
 
 Give it a try anyway, and try adding some natspec tags to `ZombieOwnership`:
 
@@ -562,4 +578,5 @@ Give it a try anyway, and try adding some natspec tags to `ZombieOwnership`:
 
 2. `@author` — Your name!
 
-3. `@dev` — E.g. Compliant with OpenZeppelin's implementation of the ERC721 spec draft
+3. `@dev` — E.g. Compliant with OpenZeppelin's implementation of the ERC721 spec
+   draft

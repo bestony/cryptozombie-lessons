@@ -1,6 +1,6 @@
 ---
 title: Refactoring Common Logic
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -295,12 +295,14 @@ material:
             return (_zombie.readyTime <= now);
         }
 
-        function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal ownerOf(_zombieId) {
+        function feedAndMultiply(uint _zombieId, uint _targetDna, string
+      _species) internal ownerOf(_zombieId) {
           Zombie storage myZombie = zombies[_zombieId];
           require(_isReady(myZombie));
           _targetDna = _targetDna % dnaModulus;
           uint newDna = (myZombie.dna + _targetDna) / 2;
-          if (keccak256(abi.encodePacked(_species)) == keccak256(abi.encodePacked("kitty"))) {
+          if (keccak256(abi.encodePacked(_species)) ==
+      keccak256(abi.encodePacked("kitty"))) {
             newDna = newDna - newDna % 100 + 99;
           }
           _createZombie("NoName", newDna);
@@ -315,9 +317,12 @@ material:
       }
 ---
 
-Whoever calls our `attack` function — we want to make sure the user actually owns the zombie they're attacking with. It would be a security concern if you could attack with someone else's zombie!
+Whoever calls our `attack` function — we want to make sure the user actually
+owns the zombie they're attacking with. It would be a security concern if you
+could attack with someone else's zombie!
 
-Can you think of how we would add a check to see if the person calling this function is the owner of the `_zombieId` they're passing in?
+Can you think of how we would add a check to see if the person calling this
+function is the owner of the `_zombieId` they're passing in?
 
 Give it some thought, and see if you can come up with the answer on your own.
 
@@ -327,22 +332,31 @@ Answer below, don't continue until you've given it some thought.
 
 ## The answer
 
-We've done this check multiple times now in previous lessons. In `changeName()`, `changeDna()`, and `feedAndMultiply()`, we used the following check:
+We've done this check multiple times now in previous lessons. In `changeName()`,
+`changeDna()`, and `feedAndMultiply()`, we used the following check:
 
 ```
 require(msg.sender == zombieToOwner[_zombieId]);
 ```
 
-This is the same logic we'll need for our `attack` function. Since we're using the same logic multiple times, let's move this into its own `modifier` to clean up our code and avoid repeating ourselves.
+This is the same logic we'll need for our `attack` function. Since we're using
+the same logic multiple times, let's move this into its own `modifier` to clean
+up our code and avoid repeating ourselves.
 
 ## Put it to the test
 
-We're back to `zombiefeeding.sol`, since this is the first place we used that logic. Let's refactor it into its own `modifier`.
+We're back to `zombiefeeding.sol`, since this is the first place we used that
+logic. Let's refactor it into its own `modifier`.
 
-1. Create a `modifier` called `ownerOf`. It will take 1 argument, `_zombieId` (a `uint`).
+1. Create a `modifier` called `ownerOf`. It will take 1 argument, `_zombieId` (a
+   `uint`).
 
-  The body should `require` that `msg.sender` is equal to `zombieToOwner[_zombieId]`, then continue with the function. You can refer to `zombiehelper.sol` if you don't remember the syntax for a modifier.
+The body should `require` that `msg.sender` is equal to
+`zombieToOwner[_zombieId]`, then continue with the function. You can refer to
+`zombiehelper.sol` if you don't remember the syntax for a modifier.
 
-2. Change the function definition of `feedAndMultiply` such that it uses the modifier `ownerOf`.
+2. Change the function definition of `feedAndMultiply` such that it uses the
+   modifier `ownerOf`.
 
-3. Now that we're using a `modifier`, you can remove the line `require(msg.sender == zombieToOwner[_zombieId]);`
+3. Now that we're using a `modifier`, you can remove the line
+   `require(msg.sender == zombieToOwner[_zombieId]);`

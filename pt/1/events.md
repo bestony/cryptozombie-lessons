@@ -1,6 +1,6 @@
 ---
 title: Eventos
-actions: ['verificarResposta', 'dicas']
+actions: ["verificarResposta", "dicas"]
 material:
   editor:
     language: sol
@@ -75,7 +75,9 @@ material:
 
 Nosso contrato esta quase terminado! Agora vamos adicionar um **_evento_**.
 
-**_Eventos_** são as maneiras dos seus contratos comunicarem que algo aconteceu na blockchain para o seu aplicativo em um frontend, que pode `ouvir` por certos tipos de eventos e tomar ações quando algo acontecer.
+**_Eventos_** são as maneiras dos seus contratos comunicarem que algo aconteceu
+na blockchain para o seu aplicativo em um frontend, que pode `ouvir` por certos
+tipos de eventos e tomar ações quando algo acontecer.
 
 Exemplo:
 
@@ -91,7 +93,8 @@ function add(uint _x, uint _y) public {
 }
 ```
 
-O seu aplicativo frontend poderá então ouvir o evento. Uma implementação em Javascript ficaria assim:
+O seu aplicativo frontend poderá então ouvir o evento. Uma implementação em
+Javascript ficaria assim:
 
 ```
 YourContract.IntegersAdded(function(error, result) {
@@ -101,10 +104,17 @@ YourContract.IntegersAdded(function(error, result) {
 
 # Vamos testar
 
-Queremos um evento que avise o frontend toda vez que um novo zumbi for criado, então o aplicativo pode mostrá-lo.
+Queremos um evento que avise o frontend toda vez que um novo zumbi for criado,
+então o aplicativo pode mostrá-lo.
 
-1. Declare um `event` chamado `NewZombie`. Este deve passar os parâmetros `zombieId` (um `uint`), `name` (uma `string`), e `dna` (um `uint`).
+1. Declare um `event` chamado `NewZombie`. Este deve passar os parâmetros
+   `zombieId` (um `uint`), `name` (uma `string`), e `dna` (um `uint`).
 
-2. Modifique a função `_createZombie` para disparar o evento `NewZombie` após adicionar o novo Zumbi em nosso array `zombies`
+2. Modifique a função `_createZombie` para disparar o evento `NewZombie` após
+   adicionar o novo Zumbi em nosso array `zombies`
 
-3. Você vai precisar do `id` do zumbi. O `array.push()` retorna um `uint` com o novo tamanho do array - e desde que o primeiro item no array tem o index 0, `array.push() - 1` vai ser o index do zumbi que acabamos de adicionar. Guarde o resultado do `zombies.push() -1` em um `uint` chamado `id`, então você pode usá-lo no evento `NewZombie` na próxima linha.
+3. Você vai precisar do `id` do zumbi. O `array.push()` retorna um `uint` com o
+   novo tamanho do array - e desde que o primeiro item no array tem o index 0,
+   `array.push() - 1` vai ser o index do zumbi que acabamos de adicionar. Guarde
+   o resultado do `zombies.push() -1` em um `uint` chamado `id`, então você pode
+   usá-lo no evento `NewZombie` na próxima linha.

@@ -1,6 +1,6 @@
 ---
 title: Zombie Loss 😞
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -274,10 +274,12 @@ material:
 
         function randMod(uint _modulus) internal returns(uint) {
           randNonce++;
-          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % _modulus;
+          return uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) %
+      _modulus;
         }
 
-        function attack(uint _zombieId, uint _targetId) external ownerOf(_zombieId) {
+        function attack(uint _zombieId, uint _targetId) external
+      ownerOf(_zombieId) {
           Zombie storage myZombie = zombies[_zombieId];
           Zombie storage enemyZombie = zombies[_targetId];
           uint rand = randMod(100);
@@ -295,9 +297,12 @@ material:
       }
 ---
 
-Now that we've coded what happens when your zombie wins, let's figure out what happens when it **loses**.
+Now that we've coded what happens when your zombie wins, let's figure out what
+happens when it **loses**.
 
-In our game, when zombies lose, they don't level down — they simply add a loss to their `lossCount`, and their cooldown is triggered so they have to wait a day before attacking again.
+In our game, when zombies lose, they don't level down — they simply add a loss
+to their `lossCount`, and their cooldown is triggered so they have to wait a day
+before attacking again.
 
 To implement this logic, we'll need an `else` statement.
 
@@ -315,8 +320,11 @@ if (zombieCoins[msg.sender] > 100000000) {
 
 1. Add an `else` statement. If our zombie loses:
 
-  a. Increment `myZombie`'s `lossCount`.
+a. Increment `myZombie`'s `lossCount`.
 
-  b. Increment `enemyZombie`'s `winCount`.
+b. Increment `enemyZombie`'s `winCount`.
 
-  c. Run the `_triggerCooldown` function on `myZombie`. This way the zombie can only attack once per day. (Remember, `_triggerCooldown` is already run inside `feedAndMultiply`. So the zombie's cooldown will be triggered whether he wins or loses.)
+c. Run the `_triggerCooldown` function on `myZombie`. This way the zombie can
+only attack once per day. (Remember, `_triggerCooldown` is already run inside
+`feedAndMultiply`. So the zombie's cooldown will be triggered whether he wins or
+loses.)

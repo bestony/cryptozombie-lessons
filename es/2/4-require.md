@@ -1,6 +1,6 @@
 ---
 title: Require
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -85,13 +85,20 @@ material:
       }
 ---
 
-En la lección 1, hicimos que los usuarios puediesen crear nuevos zombis llamando a `createRandomZombie` e introduciendo un nombre. Sin embargo, si un usuario continuase llamando a esta función crearía un ejército de zombis ilimitado, el juego no sería muy divertido.
+En la lección 1, hicimos que los usuarios puediesen crear nuevos zombis llamando
+a `createRandomZombie` e introduciendo un nombre. Sin embargo, si un usuario
+continuase llamando a esta función crearía un ejército de zombis ilimitado, el
+juego no sería muy divertido.
 
-Vamos a hacer que un jugador solo pueda llamar a esta función una vez. De esta manera los nuevo jugadores podrán llamar a esta función cuando empiezen el juego para crear el primer zombi de su ejército.
+Vamos a hacer que un jugador solo pueda llamar a esta función una vez. De esta
+manera los nuevo jugadores podrán llamar a esta función cuando empiezen el juego
+para crear el primer zombi de su ejército.
 
-¿Cómo podemos hacer para que esta función solo pueda ser llamada una vez por jugador?
+¿Cómo podemos hacer para que esta función solo pueda ser llamada una vez por
+jugador?
 
-Para eso usamos `require`. `require` hace que la función lanze un error y pare de ejecutarse si la condición no es verdadera:
+Para eso usamos `require`. `require` hace que la función lanze un error y pare
+de ejecutarse si la condición no es verdadera:
 
 ```
 function sayHiToVitalik(string _name) public returns (string) {
@@ -104,16 +111,26 @@ function sayHiToVitalik(string _name) public returns (string) {
 }
 ```
 
-Si llamas a la función con `sayHiToVitalik("Vitalik")`, esta devolverá "Hi!". Si la llamas con cualquier otra entrada, lanzará un error y no se ejecutará.
+Si llamas a la función con `sayHiToVitalik("Vitalik")`, esta devolverá "Hi!". Si
+la llamas con cualquier otra entrada, lanzará un error y no se ejecutará.
 
-De este modo `require` es muy útil a la hora de verificar que ciertas condiciones sean verdaderas antes de ejecutar una función.
+De este modo `require` es muy útil a la hora de verificar que ciertas
+condiciones sean verdaderas antes de ejecutar una función.
 
 # Vamos a probarlo
 
-En nuestro juego de zombis, no queremos que un usuario pueda crear zombis ilimitados en su ejército llamado a `createRandomZombie` — esto haría que el juego no fuese muy divertido.
+En nuestro juego de zombis, no queremos que un usuario pueda crear zombis
+ilimitados en su ejército llamado a `createRandomZombie` — esto haría que el
+juego no fuese muy divertido.
 
-Vamos a usar `require` para asegurarnos que esta función solo pueda ser ejecutada una vez por usuario, cuando vayan a crear a su primer zombi.
+Vamos a usar `require` para asegurarnos que esta función solo pueda ser
+ejecutada una vez por usuario, cuando vayan a crear a su primer zombi.
 
-1. Coloca una sentencia `require` al principio de la función `createRandomZombie`. La función debería comprobar que `ownerZombieCount[msg.sender]` sea igual a `0`, y si no que lanze un error.
+1. Coloca una sentencia `require` al principio de la función
+   `createRandomZombie`. La función debería comprobar que
+   `ownerZombieCount[msg.sender]` sea igual a `0`, y si no que lanze un error.
 
-> Nota: En Solidity, no importa que termino pongamos primero - ambos son equivalentes. De todas formas, como nuestro corrector de respuestas es bastante básico, solo aceptamos una respuesta correcta - esta espera que `ownerZombieCount[msg.sender]` vaya primero.
+> Nota: En Solidity, no importa que termino pongamos primero - ambos son
+> equivalentes. De todas formas, como nuestro corrector de respuestas es
+> bastante básico, solo aceptamos una respuesta correcta - esta espera que
+> `ownerZombieCount[msg.sender]` vaya primero.

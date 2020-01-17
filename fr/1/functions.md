@@ -1,6 +1,6 @@
 ---
 title: Déclarations de fonction
-actions: ['vérifierLaRéponse', 'indice']
+actions: ["vérifierLaRéponse", "indice"]
 material:
   editor:
     language: sol
@@ -52,9 +52,14 @@ function eatHamburgers(string _name, uint _amount) {
 
 }
 ```
-C'est une fonction appelée `eatHamburgers` qui prend 2 paramètres : un `string` et un `uint`. Le corps de la fonction est vide pour l'instant.
 
-> Remarque: Par convention (mais ce n'est pas obligatoire), les noms des paramètres des fonctions commencent avec un trait de soulignement (`_`) afin de les différencier des variables globales. Nous utiliserons cette convention tout au long de notre tutoriel.
+C'est une fonction appelée `eatHamburgers` qui prend 2 paramètres : un `string`
+et un `uint`. Le corps de la fonction est vide pour l'instant.
+
+> Remarque: Par convention (mais ce n'est pas obligatoire), les noms des
+> paramètres des fonctions commencent avec un trait de soulignement (`_`) afin
+> de les différencier des variables globales. Nous utiliserons cette convention
+> tout au long de notre tutoriel.
 
 Vous pouvez appeler la fonction comme cela :
 
@@ -64,8 +69,10 @@ eatHamburgers("vitalik", 100);
 
 # A votre tour
 
-Dans notre application, nous allons avoir besoin de créer des zombies. Pour cela, créons une fonction.
+Dans notre application, nous allons avoir besoin de créer des zombies. Pour
+cela, créons une fonction.
 
-1. Créez une fonction appelée `createZombie`. Elle devra prendre deux arguments : **\_name** (un `string`), et **\_dna** (un `uint`).
+1. Créez une fonction appelée `createZombie`. Elle devra prendre deux arguments
+   : **\_name** (un `string`), et **\_dna** (un `uint`).
 
 Laissez le corps vide pour l'instant, nous le compléterons plus tard.

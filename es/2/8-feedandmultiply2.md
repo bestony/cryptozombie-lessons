@@ -1,6 +1,6 @@
 ---
 title: ADN del Zombi
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -78,7 +78,9 @@ material:
 
 Vamos a terminar de escribir la función `feedAndMultiply`.
 
-La fórmula para calcular el ADN del nuevo zombi es simple: Es simplemente el promedio entre el ADN del zombi que hemos alimentado y el ADN del zombi objetivo. 
+La fórmula para calcular el ADN del nuevo zombi es simple: Es simplemente el
+promedio entre el ADN del zombi que hemos alimentado y el ADN del zombi
+objetivo.
 
 Por ejemplo:
 
@@ -91,16 +93,28 @@ function testDnaSplicing() public {
 }
 ```
 
-Mas tarde haremos nuestra fórmula más complicada si queremos, añadiendole por ejemplo algún valor aleatorio al nuevo ADN. Pero por el momento vamos a dejarlo simple - siempre podemos volver a ello más adelante.
+Mas tarde haremos nuestra fórmula más complicada si queremos, añadiendole por
+ejemplo algún valor aleatorio al nuevo ADN. Pero por el momento vamos a dejarlo
+simple - siempre podemos volver a ello más adelante.
 
 # Vamos a probarlo
 
-1. Primero necesitamos estar seguro que el `_targetDna` no es mayor de 16 dígitos. Para ello, podemos fijar que el valor de `_targetDna` sea igual a `_targetDna % dnaModulus` para que únicamente guarde los últimos 16 dígitos.
+1. Primero necesitamos estar seguro que el `_targetDna` no es mayor de 16
+   dígitos. Para ello, podemos fijar que el valor de `_targetDna` sea igual a
+   `_targetDna % dnaModulus` para que únicamente guarde los últimos 16 dígitos.
 
-2. Después nuestra función deberá declarar un `uint` llamado `newDna`, y fijarle el valor del promedio entre el ADN de `myZombie` y el ADN de `_targetDna` (como en el ejemplo anterior).
+2. Después nuestra función deberá declarar un `uint` llamado `newDna`, y fijarle
+   el valor del promedio entre el ADN de `myZombie` y el ADN de `_targetDna`
+   (como en el ejemplo anterior).
 
-  > Nota: Puedes acceder a las propiedades de `myZombie` usando `myZombie.name` y `myZombie.dna`
+> Nota: Puedes acceder a las propiedades de `myZombie` usando `myZombie.name` y
+> `myZombie.dna`
 
-3. Una vez que tengamos el ADN, vamos a llamar a `_createZombie`. Puedes mirar en la pestaña `zombiefactory.sol` si has olvidado los parámetros que esta función necesita para ser llamada. Ten en cuenta que necesita un nombre, así que de momento le pondremos de nombre `"NoName"` — podremos escribir una función para cambiar el nombre del zombi más adelante.
+3. Una vez que tengamos el ADN, vamos a llamar a `_createZombie`. Puedes mirar
+   en la pestaña `zombiefactory.sol` si has olvidado los parámetros que esta
+   función necesita para ser llamada. Ten en cuenta que necesita un nombre, así
+   que de momento le pondremos de nombre `"NoName"` — podremos escribir una
+   función para cambiar el nombre del zombi más adelante.
 
-> Nota: ¡Quizá notes un problema en nuestro código, que no encaja en Solidity! No te preocupes, arreglaremos esto en el siguiente capítulo ;)
+> Nota: ¡Quizá notes un problema en nuestro código, que no encaja en Solidity!
+> No te preocupes, arreglaremos esto en el siguiente capítulo ;)

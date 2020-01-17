@@ -1,6 +1,6 @@
 ---
 title: Commentaires
-actions: ['vérifierLaRéponse', 'indice']
+actions: ["vérifierLaRéponse", "indice"]
 requireLogin: true
 material:
   editor:
@@ -383,25 +383,29 @@ material:
 
 Le code Solidity de notre jeu zombie est enfin terminé !
 
-Dans les prochaines leçons, nous allons regarder comment déployer le code sur Ethereum, et comment interagir avec en utilisant Web3.js.
+Dans les prochaines leçons, nous allons regarder comment déployer le code sur
+Ethereum, et comment interagir avec en utilisant Web3.js.
 
-Mais il reste une dernière chose dans la Leçon 5 avec de vous laisser partir : Nous allons voir comment **commenter votre code**.
-
+Mais il reste une dernière chose dans la Leçon 5 avec de vous laisser partir :
+Nous allons voir comment **commenter votre code**.
 
 ## Syntaxe pour commenter
 
-Commenter en Solidity est la même chose qu'en JavaScript. Vous avez déjà vu quelques exemples de commentaire sur une seule ligne au cours des leçons de CryptoZombies :
+Commenter en Solidity est la même chose qu'en JavaScript. Vous avez déjà vu
+quelques exemples de commentaire sur une seule ligne au cours des leçons de
+CryptoZombies :
 
 ```
 // Ceci est un commentaire sur une seule ligne. C'est une note pour nous-même (ou pour les autres)
 ```
 
-Il suffit d'ajouter un `//` n'importe où et vous pouvez commentez. C'est tellement simple que vous devriez le faire tout le temps.
+Il suffit d'ajouter un `//` n'importe où et vous pouvez commentez. C'est
+tellement simple que vous devriez le faire tout le temps.
 
-Mais je sais — parfois une seule ligne n'est pas assez. Vous êtes un écrivain né, après tout !
+Mais je sais — parfois une seule ligne n'est pas assez. Vous êtes un écrivain
+né, après tout !
 
 C'est pourquoi il existe aussi des commentaires multi-ligne :
-
 
 ```
 contract CryptoZombies {
@@ -424,9 +428,14 @@ contract CryptoZombies {
 }
 ```
 
-C'est une particulièrement bonne habitude de commenter son code pour expliquer le comportement attendu de chaque fonction de votre contrat. De cette manière, un autre développeur (ou vous, après 6 mois loin de votre projet !) peut parcourir votre code pour avoir une compréhension rapide du fonctionnement sans avoir à lire le code en détail.
+C'est une particulièrement bonne habitude de commenter son code pour expliquer
+le comportement attendu de chaque fonction de votre contrat. De cette manière,
+un autre développeur (ou vous, après 6 mois loin de votre projet !) peut
+parcourir votre code pour avoir une compréhension rapide du fonctionnement sans
+avoir à lire le code en détail.
 
-Le standard dans la communauté Solidity est d'utiliser un format appelé **_natspec_**, qui ressemble à ça :
+Le standard dans la communauté Solidity est d'utiliser un format appelé
+**_natspec_**, qui ressemble à ça :
 
 ```
 /// @title Un contrat pour des opérations mathématiques basiques
@@ -447,22 +456,31 @@ contract Math {
 
 `@title` (titre) and `@author` (auteur) sont plutôt évidents.
 
-`@notice` explique à un **utilisateur** ce que le contrat / fonction fait. `@dev` est pour donner plus de détails aux développeurs.
+`@notice` explique à un **utilisateur** ce que le contrat / fonction fait.
+`@dev` est pour donner plus de détails aux développeurs.
 
-`@param` et `@return` servent à décrire chaque paramètres et ce que la fonction renvoie.
+`@param` et `@return` servent à décrire chaque paramètres et ce que la fonction
+renvoie.
 
-Vous n'avez pas tout le temps besoin d'utiliser tous ces tags pour chaque fonction — tous les tags sont optionnels. Au minimum, laissez une note `@dev` pour expliquer ce que chaque fonction fait.
+Vous n'avez pas tout le temps besoin d'utiliser tous ces tags pour chaque
+fonction — tous les tags sont optionnels. Au minimum, laissez une note `@dev`
+pour expliquer ce que chaque fonction fait.
 
 # A votre tour
 
-Si vous ne l'avez pas encore remarqué, le vérificateur de réponse de CryptoZombies ignore les commentaires quand il vérifie vos réponses. Nous ne pouvons donc pas vérifier votre code natspec dans ce chapitre ;)
+Si vous ne l'avez pas encore remarqué, le vérificateur de réponse de
+CryptoZombies ignore les commentaires quand il vérifie vos réponses. Nous ne
+pouvons donc pas vérifier votre code natspec dans ce chapitre ;)
 
-Cependant, maintenant que vous êtes un expert Solidity — nous allons supposer que vous l'avez fait !
+Cependant, maintenant que vous êtes un expert Solidity — nous allons supposer
+que vous l'avez fait !
 
 Essayez d'ajouter des tags natspec à `ZombieOwnership`:
 
-1. `@title` — Par exemple : Un contrat qui permet de gérer le transfert de propriété d'un zombie
+1. `@title` — Par exemple : Un contrat qui permet de gérer le transfert de
+   propriété d'un zombie
 
 2. `@author` — Votre nom !
 
-3. `@dev` — Par exemple : Conforme aux spécificités provisoires de l'implémentation ERC721 d'OpenZeppelin
+3. `@dev` — Par exemple : Conforme aux spécificités provisoires de
+   l'implémentation ERC721 d'OpenZeppelin

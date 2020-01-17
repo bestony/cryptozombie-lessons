@@ -1,6 +1,6 @@
 ---
 title: Enfriamiento de los Zombis
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -102,81 +102,81 @@ material:
 
         }
       "ownable.sol": |
-         pragma solidity ^0.4.25;
+        pragma solidity ^0.4.25;
 
-          /**
-          * @title Ownable
-          * @dev The Ownable contract has an owner address, and provides basic authorization control
-          * functions, this simplifies the implementation of "user permissions".
-          */
-          contract Ownable {
-            address private _owner;
+         /**
+         * @title Ownable
+         * @dev The Ownable contract has an owner address, and provides basic authorization control
+         * functions, this simplifies the implementation of "user permissions".
+         */
+         contract Ownable {
+           address private _owner;
 
-            event OwnershipTransferred(
-              address indexed previousOwner,
-              address indexed newOwner
-            );
+           event OwnershipTransferred(
+             address indexed previousOwner,
+             address indexed newOwner
+           );
 
-            /**
-            * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-            * account.
-            */
-            constructor() internal {
-              _owner = msg.sender;
-              emit OwnershipTransferred(address(0), _owner);
-            }
+           /**
+           * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+           * account.
+           */
+           constructor() internal {
+             _owner = msg.sender;
+             emit OwnershipTransferred(address(0), _owner);
+           }
 
-            /**
-            * @return the address of the owner.
-            */
-            function owner() public view returns(address) {
-              return _owner;
-            }
+           /**
+           * @return the address of the owner.
+           */
+           function owner() public view returns(address) {
+             return _owner;
+           }
 
-            /**
-            * @dev Throws if called by any account other than the owner.
-            */
-            modifier onlyOwner() {
-              require(isOwner());
-              _;
-            }
+           /**
+           * @dev Throws if called by any account other than the owner.
+           */
+           modifier onlyOwner() {
+             require(isOwner());
+             _;
+           }
 
-            /**
-            * @return true if `msg.sender` is the owner of the contract.
-            */
-            function isOwner() public view returns(bool) {
-              return msg.sender == _owner;
-            }
+           /**
+           * @return true if `msg.sender` is the owner of the contract.
+           */
+           function isOwner() public view returns(bool) {
+             return msg.sender == _owner;
+           }
 
-            /**
-            * @dev Allows the current owner to relinquish control of the contract.
-            * @notice Renouncing to ownership will leave the contract without an owner.
-            * It will not be possible to call the functions with the `onlyOwner`
-            * modifier anymore.
-            */
-            function renounceOwnership() public onlyOwner {
-              emit OwnershipTransferred(_owner, address(0));
-              _owner = address(0);
-            }
+           /**
+           * @dev Allows the current owner to relinquish control of the contract.
+           * @notice Renouncing to ownership will leave the contract without an owner.
+           * It will not be possible to call the functions with the `onlyOwner`
+           * modifier anymore.
+           */
+           function renounceOwnership() public onlyOwner {
+             emit OwnershipTransferred(_owner, address(0));
+             _owner = address(0);
+           }
 
-            /**
-            * @dev Allows the current owner to transfer control of the contract to a newOwner.
-            * @param newOwner The address to transfer ownership to.
-            */
-            function transferOwnership(address newOwner) public onlyOwner {
-              _transferOwnership(newOwner);
-            }
+           /**
+           * @dev Allows the current owner to transfer control of the contract to a newOwner.
+           * @param newOwner The address to transfer ownership to.
+           */
+           function transferOwnership(address newOwner) public onlyOwner {
+             _transferOwnership(newOwner);
+           }
 
-            /**
-            * @dev Transfers control of the contract to a newOwner.
-            * @param newOwner The address to transfer ownership to.
-            */
-            function _transferOwnership(address newOwner) internal {
-              require(newOwner != address(0));
-              emit OwnershipTransferred(_owner, newOwner);
-              _owner = newOwner;
-            }
-          }
+           /**
+           * @dev Transfers control of the contract to a newOwner.
+           * @param newOwner The address to transfer ownership to.
+           */
+           function _transferOwnership(address newOwner) internal {
+             require(newOwner != address(0));
+             emit OwnershipTransferred(_owner, newOwner);
+             _owner = newOwner;
+           }
+         }
     answer: >
       pragma solidity ^0.4.25;
 
@@ -213,12 +213,14 @@ material:
             return (_zombie.readyTime <= now);
         }
 
-        function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
+        function feedAndMultiply(uint _zombieId, uint _targetDna, string
+      _species) public {
           require(msg.sender == zombieToOwner[_zombieId]);
           Zombie storage myZombie = zombies[_zombieId];
           _targetDna = _targetDna % dnaModulus;
           uint newDna = (myZombie.dna + _targetDna) / 2;
-          if (keccak256(abi.encodePacked(_species)) == keccak256(abi.encodePacked("kitty"))) {
+          if (keccak256(abi.encodePacked(_species)) ==
+      keccak256(abi.encodePacked("kitty"))) {
             newDna = newDna - newDna % 100 + 99;
           }
           _createZombie("NoName", newDna);
@@ -233,21 +235,28 @@ material:
       }
 ---
 
-Ahora que tenemos la propiedad `readyTime` en nuestra estructura `Zombie`, vamos a pasar a `zombiefeeding.sol` e implementar el contador de enfriamiento.
+Ahora que tenemos la propiedad `readyTime` en nuestra estructura `Zombie`, vamos
+a pasar a `zombiefeeding.sol` e implementar el contador de enfriamiento.
 
 Vamos a modificar nuestro `feedAndMultiply` de tal manera que:
 
 1. Alimentarse activa el enfriamiento del zombi, y
 
-2. Los zombis no podrán alimentarse de gatitos hasta que su periodo de enfriamiento haya concluido
+2. Los zombis no podrán alimentarse de gatitos hasta que su periodo de
+   enfriamiento haya concluido
 
-Esto hará que los zombis no se alimenten de gatitos ilimitados y se multipliquen durante todo el día. En el futuro, cuando añadamos la funcionalidad de batalla, haremos que el atacar a otros zombis también tenga su enfriamiento.
+Esto hará que los zombis no se alimenten de gatitos ilimitados y se multipliquen
+durante todo el día. En el futuro, cuando añadamos la funcionalidad de batalla,
+haremos que el atacar a otros zombis también tenga su enfriamiento.
 
-Primero, vamos a definir alguna función auxiliar que nos ajuste y verifique el `readyTime` del zombi.
+Primero, vamos a definir alguna función auxiliar que nos ajuste y verifique el
+`readyTime` del zombi.
 
 ## Pasando estructuras como argumentos
 
-Puedes pasar un puntero storage a una estructura como argumento a una función `private` o `internal`. Esto es práctico, por ejemplo, para pasar entre funciones la estructura de nuestro `Zombie`.
+Puedes pasar un puntero storage a una estructura como argumento a una función
+`private` o `internal`. Esto es práctico, por ejemplo, para pasar entre
+funciones la estructura de nuestro `Zombie`.
 
 La sintaxis serí algo así:
 
@@ -257,14 +266,21 @@ function _doStuff(Zombie storage _zombie) internal {
 }
 ```
 
-De esta manera podemos pasar una referencia a nuestro zombi en una función en vez de pasar la ID del zombi y comprobar cual es.
+De esta manera podemos pasar una referencia a nuestro zombi en una función en
+vez de pasar la ID del zombi y comprobar cual es.
 
 ## Vamos a probarlo
 
-1. Empieza definiendo una función `_triggerCooldown`. Esta tomará 1 argumento, `_zombie`, un puntero a `Zombie storage`. La función deberá ser `internal`.
+1. Empieza definiendo una función `_triggerCooldown`. Esta tomará 1 argumento,
+   `_zombie`, un puntero a `Zombie storage`. La función deberá ser `internal`.
 
-2. El cuerpo de la función deberá inicializar `_zombie.readyTime` a `uint32(now + cooldownTime)`.
+2. El cuerpo de la función deberá inicializar `_zombie.readyTime` a
+   `uint32(now + cooldownTime)`.
 
-3. Luego, crea una función llamada `_isReady`. Esta función tambien recibirá un argumento `Zombie storage` llamado `_zombie`. Esta será una función `internal view`, y devolverá un `bool`.
+3. Luego, crea una función llamada `_isReady`. Esta función tambien recibirá un
+   argumento `Zombie storage` llamado `_zombie`. Esta será una función
+   `internal view`, y devolverá un `bool`.
 
-4. El cuerpo de la función deberá devolver `(_zombie.readyTime <= now)`, que evaluará si es `true` o `false`. Esta función nos dirá si ha pasado el suficiente tiempo desde la última vez que un zombi se alimentó.
+4. El cuerpo de la función deberá devolver `(_zombie.readyTime <= now)`, que
+   evaluará si es `true` o `false`. Esta función nos dirá si ha pasado el
+   suficiente tiempo desde la última vez que un zombi se alimentó.

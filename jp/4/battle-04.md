@@ -1,6 +1,6 @@
 ---
 title: 共通ロジックのリファクタリング
-actions: ['答え合わせ', 'ヒント']
+actions: ["答え合わせ", "ヒント"]
 requireLogin: true
 material:
   editor:
@@ -256,7 +256,8 @@ material:
             return (_zombie.readyTime <= now);
         }
 
-        function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal ownerOf(_zombieId) {
+        function feedAndMultiply(uint _zombieId, uint _targetDna, string
+      _species) internal ownerOf(_zombieId) {
           Zombie storage myZombie = zombies[_zombieId];
           require(_isReady(myZombie));
           _targetDna = _targetDna % dnaModulus;
@@ -276,9 +277,12 @@ material:
       }
 ---
 
-`attack`関数を呼び出す全てのユーザーが、攻撃に使っているゾンビを実際に所有しているのか確認したい。もし他の誰かのゾンビを使って攻撃できてしまったら、セキュリティが心配だからな！
+`attack`関数を呼び出す全てのユーザーが、攻撃に使っているゾンビを実際に所有してい
+るのか確認したい。もし他の誰かのゾンビを使って攻撃できてしまったら、セキュリティ
+が心配だからな！
 
-この関数を呼び出している人物が、関数に渡された`_zombieId`のオーナーなのかを見るために、どうやってチェックするかお主は思いつくだろうか？
+この関数を呼び出している人物が、関数に渡された`_zombieId`のオーナーなのかを見る
+ために、どうやってチェックするかお主は思いつくだろうか？
 
 よく考えてみて、自分で答えを思いつくか確かめるのだ。
 
@@ -288,22 +292,31 @@ material:
 
 ## 答えはこうだ
 
-これまでのレッスンでこのチェックは何度もやっている。`changeName()`、`changeDna()`、`feedAndMultiply()`において、我々は以下のチェックを使ってきた。
+これまでのレッスンでこのチェックは何度もやっている
+。`changeName()`、`changeDna()`、`feedAndMultiply()`において、我々は以下のチェッ
+クを使ってきた。
 
 ```
 require(msg.sender == zombieToOwner[_zombieId]);
 ```
 
-我々の`attack`関数にもこれと同じロジックが必要だ。何度も同じロジックを使っているから、コードを綺麗にして繰り返しを避けるために、このロジックを独自の`modifier`に格納してみよう。
+我々の`attack`関数にもこれと同じロジックが必要だ。何度も同じロジックを使っている
+から、コードを綺麗にして繰り返しを避けるために、このロジックを独自の`modifier`に
+格納してみよう。
 
 ## さあテストだ
 
-このロジックを最初に使った場所である`zombiefeeding.sol`に戻ろう。ロジックをリファクターして独自の`modifier`に入れていくぞ。
+このロジックを最初に使った場所である`zombiefeeding.sol`に戻ろう。ロジックをリフ
+ァクターして独自の`modifier`に入れていくぞ。
 
-1. `ownerOf`という`modifier`を作成せよ。これは１つの引数`_zombieId`（`uint`）を受け取る。
+1. `ownerOf`という`modifier`を作成せよ。これは１つの引数`_zombieId`（`uint`）を
+   受け取る。
 
-  本文では、`msg.sender`が`zombieToOwner[_zombieId]`と同等であるように`require`（要求）し、そうであれば関数を続けるようにせよ。もし修飾子の構文を覚えていなければ、`zombiehelper.sol`を参照してよい。
+本文では、`msg.sender`が`zombieToOwner[_zombieId]`と同等であるように`require`（
+要求）し、そうであれば関数を続けるようにせよ。もし修飾子の構文を覚えていなければ
+、`zombiehelper.sol`を参照してよい。
 
 2. `feedAndMultiply`の関数定義を変更し、`ownerOf`修飾子を使うようにせよ。
 
-3. 今は`modifier`を使っているので、以下の一行は削除するのだ。`require(msg.sender == zombieToOwner[_zombieId]);`
+3. 今は`modifier`を使っているので、以下の一行は削除するのだ
+   。`require(msg.sender == zombieToOwner[_zombieId]);`

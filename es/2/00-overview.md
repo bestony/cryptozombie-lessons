@@ -6,7 +6,8 @@ roadmap: roadmap2.jpg
 
 ¡Impresionante, humano! Eres mejor programador de lo que pensaba.
 
-La Lección 2 te enseñará a **multiplicar tu ejército de zombis alimentandose de otras formas de vida**.
+La Lección 2 te enseñará a **multiplicar tu ejército de zombis alimentandose de
+otras formas de vida**.
 
-En esta lección cubriremos conceptos más avanzados de Solidity, así que es
-muy recomendable que completes la Lección 1 antes de empezar.
+En esta lección cubriremos conceptos más avanzados de Solidity, así que es muy
+recomendable que completes la Lección 1 antes de empezar.

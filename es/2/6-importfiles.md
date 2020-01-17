@@ -1,6 +1,6 @@
 ---
 title: Importar
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -60,14 +60,16 @@ material:
       contract ZombieFeeding is ZombieFactory {
 
       }
+---¡Guau! Notarás que hemos limpiado el código de la derecha, ahora tienes unas
+pestañas en la parte superior de tu editor. Adelante, clica entre las pestañas
+para probarlo.
 
----
+Nuestro código estaba quedando algo largo, por eso lo hemos dividido en
+multiples archivos haciendolo así más manejable. Así es como normalmente deberás
+guardar tu código base en tus proyectos de Solidity.
 
-¡Guau! Notarás que hemos limpiado el código de la derecha, ahora tienes unas pestañas en la parte superior de tu editor. Adelante, clica entre las pestañas para probarlo.
-
-Nuestro código estaba quedando algo largo, por eso lo hemos dividido en multiples archivos haciendolo así más manejable. Así es como normalmente deberás guardar tu código base en tus proyectos de Solidity.
-
-Cuando tienes multiples archivos y quieres importar uno dentro de otro, Solidity usa la palabra clave `import`:
+Cuando tienes multiples archivos y quieres importar uno dentro de otro, Solidity
+usa la palabra clave `import`:
 
 ```
 import "./someothercontract.sol";
@@ -77,10 +79,13 @@ contract newContract is SomeOtherContract {
 }
 ```
 
-Entonces si tenemos un fichero llamado `someothercontract.sol` en el mismo directorio que este contrato (eso es lo que significa `./`), será importado por el compilador.
+Entonces si tenemos un fichero llamado `someothercontract.sol` en el mismo
+directorio que este contrato (eso es lo que significa `./`), será importado por
+el compilador.
 
 # Vamos a probarlo
 
-Ahora que tenemos una estructura de múltiples ficheros, necesitamos usar `import` para leer el contenido del otro fichero:
+Ahora que tenemos una estructura de múltiples ficheros, necesitamos usar
+`import` para leer el contenido del otro fichero:
 
-1. Importa `zombiefactory.sol` en nuestro nuevo fichero, `zombiefeeding.sol`. 
+1. Importa `zombiefactory.sol` en nuestro nuevo fichero, `zombiefeeding.sol`.

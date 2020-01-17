@@ -1,6 +1,6 @@
 ---
 title: Comments
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 requireLogin: true
 material:
   editor:
@@ -480,21 +480,26 @@ material:
 
 ¡El código de Solidity para nuestro juego zombie finalmente ha terminado!
 
-En las próximas lecciones, veremos cómo desplegar el código en Ethereum y cómo interactuar con él utilizando Web3.js.
+En las próximas lecciones, veremos cómo desplegar el código en Ethereum y cómo
+interactuar con él utilizando Web3.js.
 
-Pero una última cosa antes de que te dejemos ir de la Lección 5. Hablemos de **comentar tu código**.
+Pero una última cosa antes de que te dejemos ir de la Lección 5. Hablemos de
+**comentar tu código**.
 
 ## Sintaxis para los comentarios
 
-Comentar en Solidity es como JavaScript. Ya has visto algunos ejemplos de comentarios de una sola línea a lo largo de las lecciones de CryptoZombies:
+Comentar en Solidity es como JavaScript. Ya has visto algunos ejemplos de
+comentarios de una sola línea a lo largo de las lecciones de CryptoZombies:
 
 ```
 // Este es un comentario de una sola línea. Es como una nota para uno mismo (o para otros)
 ```
 
-Simplemente añade `//` en cualquier lugar y estarás comentando. Es tan fácil que deberías hacerlo todo el tiempo.
+Simplemente añade `//` en cualquier lugar y estarás comentando. Es tan fácil que
+deberías hacerlo todo el tiempo.
 
-Pero te entiendo— a veces una sola línea no es suficiente. ¡Eres escritor, después de todo!
+Pero te entiendo— a veces una sola línea no es suficiente. ¡Eres escritor,
+después de todo!
 
 Por lo tanto, también tenemos comentarios de varias líneas:
 
@@ -519,9 +524,14 @@ contract CryptoZombies {
 }
 ```
 
-En particular, es una buena práctica comentar su código para explicar el comportamiento esperado de cada función en su contrato. De esta forma, otro desarrollador (¡O tú, después de un paréntesis de 6 meses en un proyecto!) puede leer rápidamente y comprender a un nivel alto lo que hace su código sin tener que leer el código en sí.
+En particular, es una buena práctica comentar su código para explicar el
+comportamiento esperado de cada función en su contrato. De esta forma, otro
+desarrollador (¡O tú, después de un paréntesis de 6 meses en un proyecto!) puede
+leer rápidamente y comprender a un nivel alto lo que hace su código sin tener
+que leer el código en sí.
 
-El estándar en la comunidad Solidity es usar un formato llamado **_natspec_**, que tiene esta apariencia:
+El estándar en la comunidad Solidity es usar un formato llamado **_natspec_**,
+que tiene esta apariencia:
 
 ```
 /// @title Un contrato para operaciones matemáticas básicas
@@ -542,22 +552,32 @@ contract Math {
 
 `@title` y `@author` son simples.
 
-`@notice` explica a un **usuario** lo que hace el contrato o la función. `@dev` es para explicar detalles adicionales a los desarrolladores.
+`@notice` explica a un **usuario** lo que hace el contrato o la función. `@dev`
+es para explicar detalles adicionales a los desarrolladores.
 
-`@param` y `@return` son para describir para qué sirve cada parámetro y el valor de retorno de una función.
+`@param` y `@return` son para describir para qué sirve cada parámetro y el valor
+de retorno de una función.
 
-Tenga en cuenta que no siempre tiene que usar todas estas etiquetas para cada función — todas las etiquetas son opcionales. Pero al menos, deje una nota  `@dev` explicando lo que hace cada función.
+Tenga en cuenta que no siempre tiene que usar todas estas etiquetas para cada
+función — todas las etiquetas son opcionales. Pero al menos, deje una nota
+`@dev` explicando lo que hace cada función.
 
 # Póngalo a prueba
 
-Si no lo ha notado todavía, el corrector de CryptoZombies ignora los comentarios cuando verifica sus respuestas. Por lo tanto, no podemos verificar su código utilizando comentarios natspec  ;)
+Si no lo ha notado todavía, el corrector de CryptoZombies ignora los comentarios
+cuando verifica sus respuestas. Por lo tanto, no podemos verificar su código
+utilizando comentarios natspec ;)
 
-Sin embargo, a estas alturas ya eres un genio de Solidity — ¡Vamos a asumir que lo has entendido!
+Sin embargo, a estas alturas ya eres un genio de Solidity — ¡Vamos a asumir que
+lo has entendido!
 
-Pruébalo de todos modos e intenta añadir algunas etiquetas natspec a `ZombieOwnership`:
+Pruébalo de todos modos e intenta añadir algunas etiquetas natspec a
+`ZombieOwnership`:
 
-1. `@title` — Ejemplo. Un contrato que gestiona la transferencia de la propiedad de un zombi.
+1. `@title` — Ejemplo. Un contrato que gestiona la transferencia de la propiedad
+   de un zombi.
 
 2. `@author` — ¡Tu nombre!
 
-3. `@dev` — Ejemplo. Compatible con la implementación de OpenZeppelin borrador de la especificación ERC721
+3. `@dev` — Ejemplo. Compatible con la implementación de OpenZeppelin borrador
+   de la especificación ERC721

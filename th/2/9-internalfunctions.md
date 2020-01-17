@@ -1,6 +1,6 @@
 ---
 title: เนื้อหาเรื่อง Function Visibility เพิ่มเติม
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -106,17 +106,27 @@ material:
 
 เมื่อเราพยายามที่จะคอมไพล์มันออกมา จะเห็นได้ว่าจะเกิด error ขึ้น
 
-สาเหตุคือเมื่อเราพยายามที่จะเรียกฟังก์ชั่น `_createZombie` จากภายใน `ZombieFeeding` แต่เนื่องจากฟังก์ชั่น `_createZombie` นั้นมีค่าเป็น `private` ซึ่งอยู่ภายใน `ZombieFactory` แปลว่า contract ใดๆ ที่มีการ inherit มาจาก `ZombieFactory` จะไม่สามารถเข้าถึงได้
+สาเหตุคือเมื่อเราพยายามที่จะเรียกฟังก์ชั่น `_createZombie` จากภายใน
+`ZombieFeeding` แต่เนื่องจากฟังก์ชั่น `_createZombie` นั้นมีค่าเป็น `private`
+ซึ่งอยู่ภายใน `ZombieFactory` แปลว่า contract ใดๆ ที่มีการ inherit มาจาก
+`ZombieFactory` จะไม่สามารถเข้าถึงได้
 
 ## Internal และ External
 
-นอกจาก `public` และ `private` Solidity ยังมีค่าการมองเห็น (visibility) อีก 2 ค่า: `internal` และ `external`
+นอกจาก `public` และ `private` Solidity ยังมีค่าการมองเห็น (visibility) อีก 2
+ค่า: `internal` และ `external`
 
-`internal` เหมือนกับ `private` เว้นเพียงแต่มันยังสามารถถูกเข้าถึงจาก contract อื่น ๆ ที่มีการ inherit มาจาก contract ปัจจุบัน **(เอ... เหมือนจะเป็นสิ่งที่เรากำลังต้องการอยู่ด้วยสิ!)**.
+`internal` เหมือนกับ `private` เว้นเพียงแต่มันยังสามารถถูกเข้าถึงจาก contract
+อื่น ๆ ที่มีการ inherit มาจาก contract ปัจจุบัน **(เอ...
+เหมือนจะเป็นสิ่งที่เรากำลังต้องการอยู่ด้วยสิ!)**.
 
-`external` นั้นคล้ายกับ `public`เพียงแต่ว่าฟังก์ชั่นต่างๆ จะสามารถถูกเรียกได้เฉพาะจากด้านนอกของ contract เท่านั้น — ฟังก์ชั่นเหล่านี้ไม่สามารถถูกเรียกโดยฟังก์ชั่นอื่นๆ ที่อยู่ภายใน contract ซึ่งจะมาคุยกันว่ากรณีใดที่จะต้องใช้ `external` หรือ `public` ในภายหลัง
+`external` นั้นคล้ายกับ `public`เพียงแต่ว่าฟังก์ชั่นต่างๆ
+จะสามารถถูกเรียกได้เฉพาะจากด้านนอกของ contract เท่านั้น —
+ฟังก์ชั่นเหล่านี้ไม่สามารถถูกเรียกโดยฟังก์ชั่นอื่นๆ ที่อยู่ภายใน contract
+ซึ่งจะมาคุยกันว่ากรณีใดที่จะต้องใช้ `external` หรือ `public` ในภายหลัง
 
-ในการประกาศฟังก์ชั่น `internal` หรือ `external`  syntax ที่ใช้จะเหมือนกันกับใน `private` และ `public`ทุกประการ:
+ในการประกาศฟังก์ชั่น `internal` หรือ `external` syntax ที่ใช้จะเหมือนกันกับใน
+`private` และ `public`ทุกประการ:
 
 ```
 contract Sandwich {
@@ -140,6 +150,7 @@ contract BLT is Sandwich {
 
 # มาทดสอบกันดูอีก
 
-1. เปลี่ยน `_createZombie()` จาก `private` ให้เป็น `internal` แทน เพื่อให้ contract อื่น ๆ ของเราสามารถเข้าถึงฟังก์ชั่นนี้ได้
+1. เปลี่ยน `_createZombie()` จาก `private` ให้เป็น `internal` แทน เพื่อให้
+   contract อื่น ๆ ของเราสามารถเข้าถึงฟังก์ชั่นนี้ได้
 
-  ยังสามารถไปเปิด tab `zombiefactory.sol`ได้เหมือนเคย หากมีข้อสงสัย
+ยังสามารถไปเปิด tab `zombiefactory.sol`ได้เหมือนเคย หากมีข้อสงสัย

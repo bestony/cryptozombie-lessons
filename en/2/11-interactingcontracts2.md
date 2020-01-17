@@ -1,6 +1,6 @@
 ---
 title: Using an Interface
-actions: ['checkAnswer', 'hints']
+actions: ["checkAnswer", "hints"]
 material:
   editor:
     language: sol
@@ -114,7 +114,8 @@ material:
       }
 ---
 
-Continuing our previous example with `NumberInterface`, once we've defined the interface as:
+Continuing our previous example with `NumberInterface`, once we've defined the
+interface as:
 
 ```
 contract NumberInterface {
@@ -126,7 +127,7 @@ We can use it in a contract as follows:
 
 ```
 contract MyContract {
-  address NumberInterfaceAddress = 0xab38... 
+  address NumberInterfaceAddress = 0xab38...
   // ^ The address of the FavoriteNumber contract on Ethereum
   NumberInterface numberContract = NumberInterface(NumberInterfaceAddress);
   // Now `numberContract` is pointing to the other contract
@@ -139,10 +140,14 @@ contract MyContract {
 }
 ```
 
-In this way, your contract can interact with any other contract on the Ethereum blockchain, as long they expose those functions as `public` or `external`.
+In this way, your contract can interact with any other contract on the Ethereum
+blockchain, as long they expose those functions as `public` or `external`.
 
 # Put it to the test
 
 Let's set up our contract to read from the CryptoKitties smart contract!
 
-1. I've saved the address of the CryptoKitties contract in the code for you, under a variable named `ckAddress`. In the next line, create a `KittyInterface` named `kittyContract`, and initialize it with `ckAddress` — just like we did with `numberContract` above.
+1. I've saved the address of the CryptoKitties contract in the code for you,
+   under a variable named `ckAddress`. In the next line, create a
+   `KittyInterface` named `kittyContract`, and initialize it with `ckAddress` —
+   just like we did with `numberContract` above.
